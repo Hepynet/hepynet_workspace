@@ -1,0 +1,3 @@
+[submodule "hepynet_root_npy"]
+	path = hepynet_root_npy
+	url = https://github.com/HEPTools/hepynet_root_npy.git

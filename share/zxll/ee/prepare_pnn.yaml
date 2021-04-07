@@ -1,0 +1,84 @@
+job:
+    job_name: "ee-pnn-default"
+    job_type: "prepare"
+    save_dir: "run/zxll/ee"
+    rdm_seed: 91
+
+input:
+    campaign: ""
+    arr_path: "zxll/arrays"
+    arr_version: "V03"
+    region: "mva_2jet"
+
+    channel: "ee"
+    norm_array: true
+    bkg_key: "all"
+    sig_key: "all_norm"
+    #bkg_sumofweight: 1000
+    #sig_sumofweight: 5000
+
+    bkg_list:
+        - "bkg_diboson"
+        - "bkg_top"
+        - "bkg_W"
+        - "bkg_Zee"
+        #- "bkg_Zmumu"
+        - "bkg_Ztautau"
+    sig_list:
+        - "sig_HVTee_m0250"
+        - "sig_HVTee_m0300"
+        - "sig_HVTee_m0350"
+        - "sig_HVTee_m0500"
+        - "sig_HVTee_m0700"
+        - "sig_HVTee_m1000"
+        - "sig_HVTee_m1500"
+        - "sig_HVTee_m2000"
+        - "sig_HVTee_m2500"
+        - "sig_HVTee_m3000"
+        - "sig_HVTee_m3500"
+        - "sig_HVTee_m4000"
+        - "sig_HVTee_m4500"
+        - "sig_HVTee_m5000"
+        - "sig_HVTee_m6000"
+    
+    cut_features:
+        - "ll_m"
+    cut_values:
+        - 200
+    cut_types:
+        - ">"
+
+    selected_features:
+        - "m_truth"
+        - "lept_0_pt"
+        - "lept_0_eta"
+        - "lept_0_phi"
+        - "lept_1_pt"
+        - "lept_1_eta"
+        - "lept_1_phi"
+        - "ll_pt"
+        - "ll_m"
+        - "ll_dphi"
+        - "jet_0_pt"
+        - "jet_0_eta"
+        - "jet_0_phi"
+        - "jet_0_m"
+        - "jet_0_fjvt"
+        - "jet_0_time"
+        - "jet_1_pt"
+        - "jet_1_eta"
+        - "jet_1_phi"
+        - "jet_1_m"
+        - "jet_1_fjvt"
+        - "jet_1_time"
+        - "jj_m"
+        - "n_jet"
+        - "n_bjet"
+        - "met"
+        - "met_sumet"
+        - "met_phi"
+        - "met_sig"
+        - "met_ht"
+    reset_feature: true
+    reset_feature_name: "m_truth"
+    rm_negative_weight_events: true
