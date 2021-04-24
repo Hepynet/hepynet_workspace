@@ -1,15 +1,14 @@
 config:
     include:
-        - "share/zxll/ee/input_pnn.yaml"
+        - "share/zprime/low_mass/input.yaml"
 
 job:
-    job_name: "ee-pnn-default"
+    job_name: "train-all-mass"
     job_type: "train"
-    save_dir: "run/zxll/ee"
-    rdm_seed: 91
+    save_dir: "run/zprime/low_mass"
 
 train:
-    model_name: "zxll_ee_pnn"
+    model_name: "zprime_pdnn_model"
     model_class: "Model_Sequential_Flat"
     layers: 5
     nodes: 128
@@ -18,12 +17,10 @@ train:
     nesterov: true
     test_rate: .2
     val_split: .25
-    k_folds: 5
-    learn_rate: 1
-    #learn_rate_decay: 1.e-4
+    learn_rate: 0.0003
     learn_rate_decay: 1.e-5
-    batch_size: 2048
-    epochs: 200
+    batch_size: 128
+    epochs: 30
     sig_class_weight: 1.
     bkg_class_weight: 1.
     # early stop setups
@@ -31,8 +28,10 @@ train:
     early_stop_paras:
         monitor: "val_loss"
         min_delta: 0
-        patience: 1
+        patience: 3
         mode: "min"
         restore_best_weights: true
+    # save model or not
+    save_model: true
 
     verbose: 1

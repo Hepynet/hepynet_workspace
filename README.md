@@ -1,6 +1,6 @@
 # **Hepynet Workspace**
 
-Workspace repository to do DNN studies with [**hepynet**](https://github.com/StarPrecursor/hepynet)
+Workspace repository to do DNN studies with [**hepynet**](https://github.com/Hepynet/hepynet)
 
 ## **Introduction**
 

@@ -1,16 +1,5 @@
-job:
-    job_name: "mm-pnn-default"
-    job_type: "prepare"
-    save_dir: "run/zxll/mm"
-    rdm_seed: 91
-
 input:
-    campaign: ""
-    arr_path: "zxll/arrays"
-    arr_version: "V03"
-    region: "mva_2jet"
-
-    channel: "mm"
+    input_path: "ZXll/data_frames/V03/mm/mva_2jet/zxll_mm_mll_200.feather"
     norm_array: true
     bkg_key: "all"
     sig_key: "all_norm"
@@ -40,13 +29,6 @@ input:
         - "sig_HVTmumu_m4500"
         - "sig_HVTmumu_m5000"
         - "sig_HVTmumu_m6000"
-    
-    cut_features:
-        - "ll_m"
-    cut_values:
-        - 200
-    cut_types:
-        - ">"
 
     selected_features:
         - "m_truth"

@@ -1,0 +1,53 @@
+input:
+    input_path: "zprime/data_frames/21-0120-sys/low_mass/zprime_low_m_quadtype_2.feather"
+    norm_array: true
+    bkg_key: "all"
+    sig_key: "all_norm"
+    bkg_sumofweight: 100000
+    sig_sumofweight: 100000
+
+    bkg_list:
+        - "bkg_qcd"
+        - "bkg_ggZZ"
+    sig_list:
+        - "sig_Zp005"
+        - "sig_Zp007"
+        - "sig_Zp009"
+        - "sig_Zp011"
+        - "sig_Zp013"
+        - "sig_Zp015"
+        - "sig_Zp017"
+        - "sig_Zp019"
+        - "sig_Zp023"
+        - "sig_Zp027"
+        - "sig_Zp031"
+        - "sig_Zp035"
+        - "sig_Zp039"
+
+    selected_features:
+        - "m_truth"
+        - "ptl1"
+        - "ptl2"
+        - "ptl3"
+        - "ptl4"
+        - "etal1"
+        - "etal2"
+        - "etal3"
+        - "etal4"
+        - "mz1_mz2"
+        - "ptz1"
+        - "ptz2"
+        - "mzz"
+        - "ptzz"
+        - "deltarl12"
+        - "deltarl34"
+        - "detal12"
+        - "detal34"
+
+    validation_features:
+        - "mz1"
+        - "mz2"
+
+    reset_feature: true
+    reset_feature_name: "m_truth"
+    rm_negative_weight_events: true

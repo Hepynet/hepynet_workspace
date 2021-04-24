@@ -1,16 +1,5 @@
-job:
-    job_name: "ee-pnn-default"
-    job_type: "prepare"
-    save_dir: "run/zxll/ee"
-    rdm_seed: 91
-
 input:
-    campaign: ""
-    arr_path: "zxll/arrays"
-    arr_version: "V03"
-    region: "mva_2jet"
-
-    channel: "ee"
+    input_path: "ZXll/data_frames/V03/ee/mva_2jet/zxll_ee_mll_200.feather"
     norm_array: true
     bkg_key: "all"
     sig_key: "all_norm"
@@ -40,13 +29,6 @@ input:
         - "sig_HVTee_m4500"
         - "sig_HVTee_m5000"
         - "sig_HVTee_m6000"
-    
-    cut_features:
-        - "ll_m"
-    cut_values:
-        - 200
-    cut_types:
-        - ">"
 
     selected_features:
         - "m_truth"

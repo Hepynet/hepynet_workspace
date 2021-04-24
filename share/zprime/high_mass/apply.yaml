@@ -1,11 +1,11 @@
 config:
     include:
-        - "share/zxll/ee/train_pnn.yaml"
+        - "share/zprime/high_mass/train.yaml"
 
 job:
-    job_name: "ee-pnn-default"
+    job_name: "train-all-mass"
     job_type: "apply"
-    load_job_name: "ee-pnn-default"
+    load_job_name: "train-all-mass"
 
 input:
     # only remove negative events for training
@@ -34,12 +34,15 @@ apply:
 
     book_kine: true
     cfg_kine:
+        mz1:
+            x_label: "$m_{Z1} [GeV]$"
+            range_raw: [20, 110]
         hist_kwargs_sig:
-            bins: 25
+            bins: 40
             histtype: "stepfilled"
             density: true
         hist_kwargs_bkg:
-            bins: 25
+            bins: 40
             histtype: "stepfilled"
             density: true
         save_format: "png"
@@ -47,6 +50,14 @@ apply:
     book_cor_matrix: true
 
     # Studies depending on models
+
+    #book_fit_npy: true
+    cfg_fit_npy:
+        fit_npy_region:
+        fit_npy_branches:
+            - "mz1"
+            - "mz2"
+        npy_save_dir: "zprime/arrays_fit/fit_ntup_high"
 
     book_roc: true
 
@@ -62,22 +73,18 @@ apply:
     book_mva_scores_data_mc: true
     cfg_mva_scores_data_mc:
         sig_list:
-            - "sig_HVTee_m0250"
-            - "sig_HVTee_m0500"
-            - "sig_HVTee_m1000"
-            - "sig_HVTee_m3000"
-            - "sig_HVTee_m5000"
+            - "sig_Zp042"
+            - "sig_Zp051"
+            - "sig_Zp060"
+            - "sig_Zp069"
+            - "sig_Zp075"
         bkg_list:
-            - "bkg_Zee"
-            - "bkg_top"
-            - "bkg_diboson"
-            - "bkg_W"
-            - "bkg_Ztautau"
-        data_key:
+            - "bkg_ggZZ"
+            - "bkg_qcd"
         apply_data: false
         apply_data_range:
         plot_title: "MVA scores"
-        bins: 25
+        bins: 40
         range: [0, 1]
         density: true
         log: true
@@ -90,6 +97,9 @@ apply:
 
     book_cut_kine_study: true
     cfg_cut_kine_study:
+        mz1:
+            x_label: "$m_{Z1}$ (normalized value for training)"
+            range_processed: [-3, 3]
         bins: 40
         range:
         histtype: "stepfilled"
@@ -98,8 +108,8 @@ apply:
         save_format: "png"
         save_ratio_table: true
         dnn_cut_list:
-            - 0.5
-            #- 0.6
+            #- 0.5
+            - 0.6
             #- 0.8
 
     book_importance_study: true

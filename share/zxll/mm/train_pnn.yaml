@@ -1,6 +1,6 @@
 config:
     include:
-        - "share/zxll/mm/prepare_pnn.yaml"
+        - "share/zxll/mm/input_pnn.yaml"
 
 job:
     job_name: "mm-pnn-default"
@@ -9,7 +9,7 @@ job:
     rdm_seed: 91
 
 train:
-    model_name: "zxll_ee_pnn"
+    model_name: "zxll_mm_pnn"
     model_class: "Model_Sequential_Flat"
     layers: 5
     nodes: 128
@@ -19,12 +19,11 @@ train:
     test_rate: .2
     val_split: .25
     k_folds: 5
-    learn_rate: 1
+    learn_rate: 0.1
     #learn_rate_decay: 1.e-4
     learn_rate_decay: 1.e-5
     batch_size: 2048
     epochs: 200
-    #epochs: 3
     sig_class_weight: 1.
     bkg_class_weight: 1.
     # early stop setups

@@ -9,13 +9,21 @@ job:
 
 input:
     # only remove negative events for training
-    rm_negative_weight_events: false
+    negative_weight_process: "keep"
+    #reset_feature: false
 
 apply:
+    plot_atlas_label: True
+    atlas_label:
+        status: "wip"
+        simulation: "true"
+        energy: "13 TeV"
+        lumi: 139
+
     #check_model_epoch: true
     epoch_check_interval: 20
 
-    book_history: true
+    #book_history: true
     cfg_history:
         accuracy:
             plot_title: "accuracy history"
@@ -24,9 +32,131 @@ apply:
             plot_title: "loss history"
             save_format: "png"
 
-    book_roc: true
+    book_kine: true
+    cfg_kine:
+        separate_bkg_sig: false
+        bkg_scale: 1
+        sig_scale_raw: 100
+        hist_kwargs_sig:
+            bins: 25
+            histtype: "step"
+            density: false
+        hist_kwargs_bkg:
+            bins: 25
+            histtype: "stepfilled"
+            density: false
+        save_format: "png"
+        bins: 50
+        logy: true
+        lept_0_pt:
+            bins: 120
+            range_raw: [10, 10000]
+            logbin: true
+            logx: true
+        lept_0_eta:
+            range_raw: [-3, 3]
+        lept_0_phi:
+            range_raw: [-3.15, 3.15]
+        lept_1_pt:
+            bins: 120
+            range_raw: [10, 10000]
+            logbin: true
+            logx: true
+        lept_1_eta:
+            range_raw: [-3, 3]
+        lept_1_phi:
+            range_raw: [-3.15, 3.15]
+        ll_pt:
+            bins: 120
+            range_raw: [10, 10000]
+            logbin: true
+            logx: true
+        ll_m:
+            bins: 120
+            range_raw: [10, 10000]
+            logbin: true
+            logx: true
+        ll_dphi:
+            range_raw: [-3.15, 3.15]
+        jet_0_pt:
+            bins: 120
+            range_raw: [10, 10000]
+            logbin: true
+            logx: true
+        jet_0_eta:
+            range_raw: [-3, 3]
+        jet_0_phi:
+            range_raw: [-3.15, 3.15]
+        jet_0_m:
+            bins: 120
+            range_raw: [10, 10000]
+            logbin: true
+            logx: true
+        jet_0_fjvt:
+            range_raw: [0, 0.8]
+        jet_0_time:
+            bins: 100
+            range_raw: [-20 , 20]
+        jet_1_pt:
+            bins: 120
+            range_raw: [10, 10000]
+            logbin: true
+            logx: true
+        jet_1_eta:
+            range_raw: [-3, 3]
+        jet_1_phi:
+            range_raw: [-3.15, 3.15]
+        jet_1_m:
+            bins: 120
+            range_raw: [10, 10000]
+            logbin: true
+            logx: true
+        jet_1_fjvt:
+            range_raw: [0, 0.8]
+        jet_1_time:
+            bins: 100
+            range_raw: [-20 , 20]
+        jj_m:
+            bins: 120
+            range_raw: [10, 10000]
+            logbin: true
+            logx: true
+        n_jet:
+            bins: 10
+            range_raw: [2, 12]
+        n_bjet:
+            bins: 10
+            range_raw: [0, 10]
+        met:
+            bins: 120
+            range_raw: [10, 10000]
+            logbin: true
+            logx: true
+        met_sumet:
+            bins: 120
+            range_raw: [10, 10000]
+            logbin: true
+            logx: true
+        met_phi:
+            range_raw: [-3.15, 3.15]
+        met_sig:
+            range: [0, 50]
+        met_ht:
+            bins: 10
+            range: [0, 1]
 
-    book_train_test_compare: true
+
+    #book_cor_matrix: true
+
+    # Studies depending on models
+
+    jump_model_studies: true
+
+    #book_confusion_matrix: true
+    #book_roc: true
+    #book_pr: true
+
+    #book_train_test_compare: true
     cfg_train_test_compare:
         plot_title: "train/test MVA scores compare"
         bins: 25
@@ -35,7 +165,7 @@ apply:
         log: true
         save_format: "png"
 
-    book_mva_scores_data_mc: true
+    #book_mva_scores_data_mc: true
     cfg_mva_scores_data_mc:
         sig_list:
             - "sig_HVTmumu_m0250"
@@ -44,12 +174,11 @@ apply:
             - "sig_HVTmumu_m3000"
             - "sig_HVTmumu_m5000"
         bkg_list:
-            - "bkg_Zmumu"
-            - "bkg_top"
             - "bkg_diboson"
             - "bkg_W"
-            # - "bkg_Zee"
             - "bkg_Ztautau"
+            - "bkg_top"
+            - "bkg_Zmumu"
         data_key:
         apply_data: false
         apply_data_range:
@@ -61,16 +190,11 @@ apply:
         save_format: "png"
         use_root: false
 
-    book_kine_study: true
-    cfg_kine_study:
-        bins: 50
-        range:
-        histtype: "stepfilled"
-        alpha: 0.3
-        density: true
-        save_format: "png"
+    #book_significance_scan: true
+    cfg_significance_scan:
+        significance_algo: "s_sqrt_sb_rel"
 
-    book_cut_kine_study: true
+    #book_cut_kine_study: true
     cfg_cut_kine_study:
         bins: 40
         range:
@@ -81,20 +205,9 @@ apply:
         save_ratio_table: true
         dnn_cut_list:
             - 0.5
-            - 0.6
-            - 0.8
+            #- 0.6
+            #- 0.8
 
-    book_cor_matrix: true
-
-    book_importance_study: true
-
-    book_significance_scan: true
-    cfg_significance_scan:
-        significance_algo: "s_sqrt_sb_rel"
-
-    # book_fit_npy: true
-    cfg_fit_npy:
-        fit_npy_region: "mva_2jet"
-        fit_npy_branches:
-            - "ll_m"
-        npy_save_dir: "ZXll/arrays_fit/test"
+    #book_importance_study: true
+    cfg_importance_study:
+        log: false
