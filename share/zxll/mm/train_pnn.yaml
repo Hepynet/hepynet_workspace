@@ -18,12 +18,13 @@ train:
     nesterov: true
     test_rate: .2
     val_split: .25
-    k_folds: 5
+    #k_folds: 5
     learn_rate: 0.1
     #learn_rate_decay: 1.e-4
     learn_rate_decay: 1.e-5
     batch_size: 2048
-    epochs: 200
+    #epochs: 200
+    epochs: 20
     sig_class_weight: 1.
     bkg_class_weight: 1.
     # early stop setups

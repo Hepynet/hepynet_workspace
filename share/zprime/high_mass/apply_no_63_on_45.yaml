@@ -6,7 +6,7 @@ config:
 job:
     job_name: "apply-45"
     job_type: "apply"
-    load_job_name: "train-all-mass"
+    load_job_name: "train-no-63"
 
 input:
     sig_key: "sig_Zp045"

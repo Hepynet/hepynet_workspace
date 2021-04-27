@@ -4,15 +4,15 @@ config:
         - "share/zprime/high_mass/apply_single.yaml"
 
 job:
-    job_name: "apply-45"
+    job_name: "apply-66"
     job_type: "apply"
-    load_job_name: "train-all-mass"
+    load_job_name: "train-no-63"
 
 input:
-    sig_key: "sig_Zp045"
+    sig_key: "sig_Zp066"
     sig_list:
-        - "sig_Zp045"
+        - "sig_Zp066"
     # only remove negative events for training
     negative_weight_process: "keep"
-    cut_expression: "mz1 > 40.807988 and mz1 < 49.192012"
+    cut_expression: "mz1 > 59.804356999999996 and mz1 < 72.195643"
 

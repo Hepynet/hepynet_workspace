@@ -1,5 +1,6 @@
 input:
-    input_path: "ZXll/data_frames/V03/ee/mva_2jet/zxll_ee_mll_200.feather"
+    #input_path: "ZXll/data_frames/V03/ee/mva_2jet/zxll_ee_mll_200.feather"
+    input_path: "ZXll/data_frames/V03/ee/mva_2jet_timing/zxll_ee.feather"
     norm_array: true
     bkg_key: "all"
     sig_key: "all_norm"
@@ -61,6 +62,7 @@ input:
         - "met_phi"
         - "met_sig"
         - "met_ht"
+    cut_expression: "ll_m > 150"
     reset_feature: true
     reset_feature_name: "m_truth"
     rm_negative_weight_events: true

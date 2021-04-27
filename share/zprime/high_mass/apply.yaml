@@ -34,12 +34,13 @@ apply:
 
     book_kine: true
     cfg_kine:
+        separate_bkg_sig: false
         mz1:
             x_label: "$m_{Z1} [GeV]$"
             range_raw: [20, 110]
         hist_kwargs_sig:
             bins: 40
-            histtype: "stepfilled"
+            histtype: "step"
             density: true
         hist_kwargs_bkg:
             bins: 40
