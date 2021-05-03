@@ -1,0 +1,20 @@
+config:
+    include:
+        - "share/zxll/mm/input_pnn.yaml"
+
+input:
+    selected_features:
+        - "m_truth"
+        - "ll_pt"
+        - "ll_y"
+        - "jet_0_pt"
+        - "jet_0_eta"
+        - "jet_0_ll_delta_phi"
+        - "jet_1_pt"
+        - "jet_1_eta"
+        - "jet_1_ll_delta_phi"
+        - "jj_pt"
+        - "jj_y"
+        - "jj_ll_delta_phi"
+        - "jj_m"
+        - "met"

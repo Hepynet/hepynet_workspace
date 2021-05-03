@@ -1,0 +1,14 @@
+config:
+    include:
+        - "share/zxll/mm/apply_pnn.yaml"
+        - "share/zxll/mm/train_pnn_hmumu.yaml"
+
+job:
+    job_name: "mm-pnn-hmumu"
+    job_type: "apply"
+    load_job_name: "mm-pnn-hmumu"
+
+input:
+    # only remove negative events for training
+    negative_weight_process: "to_zero"
+    #reset_feature: false

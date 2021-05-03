@@ -1,0 +1,139 @@
+# check kinematics without any cuts
+
+config:
+    include:
+        - "share/zxll/ee/train_pnn.yaml"
+
+job:
+    job_name: "ee-pnn-default"
+    job_type: "apply"
+    load_job_name: "ee-pnn-default"
+
+input:
+    # only remove negative events for training
+    negative_weight_process: "keep"
+    #reset_feature: false
+    cut_expression: ""  # overwrite original cuts
+
+apply:
+    plot_atlas_label: True
+    atlas_label:
+        status: "wip"
+        simulation: "true"
+        energy: "13 TeV"
+        lumi: 139
+
+    book_kine: true
+    cfg_kine:
+        separate_bkg_sig: false
+        bkg_scale: 1
+        sig_scale_raw: 100
+        hist_kwargs_sig:
+            bins: 25
+            histtype: "step"
+            density: false
+        hist_kwargs_bkg:
+            bins: 25
+            histtype: "stepfilled"
+            density: false
+        save_format: "png"
+        bins: 50
+        logy: true
+        lept_0_pt:
+            bins: 120
+            range_raw: [10, 10000]
+            logbin: true
+            logx: true
+        lept_0_eta:
+            range_raw: [-3, 3]
+        lept_0_phi:
+            range_raw: [-3.15, 3.15]
+        lept_1_pt:
+            bins: 120
+            range_raw: [10, 10000]
+            logbin: true
+            logx: true
+        lept_1_eta:
+            range_raw: [-3, 3]
+        lept_1_phi:
+            range_raw: [-3.15, 3.15]
+        ll_pt:
+            bins: 120
+            range_raw: [10, 10000]
+            logbin: true
+            logx: true
+        ll_m:
+            bins: 120
+            range_raw: [10, 10000]
+            logbin: true
+            logx: true
+        ll_dphi:
+            range_raw: [-3.15, 3.15]
+        jet_0_pt:
+            bins: 120
+            range_raw: [10, 10000]
+            logbin: true
+            logx: true
+        jet_0_eta:
+            range_raw: [-3, 3]
+        jet_0_phi:
+            range_raw: [-3.15, 3.15]
+        jet_0_m:
+            bins: 120
+            range_raw: [10, 10000]
+            logbin: true
+            logx: true
+        jet_0_fjvt:
+            range_raw: [0, 0.8]
+        jet_0_time:
+            bins: 100
+            range_raw: [-20 , 20]
+        jet_1_pt:
+            bins: 120
+            range_raw: [10, 10000]
+            logbin: true
+            logx: true
+        jet_1_eta:
+            range_raw: [-3, 3]
+        jet_1_phi:
+            range_raw: [-3.15, 3.15]
+        jet_1_m:
+            bins: 120
+            range_raw: [10, 10000]
+            logbin: true
+            logx: true
+        jet_1_fjvt:
+            range_raw: [0, 0.8]
+        jet_1_time:
+            bins: 100
+            range_raw: [-20 , 20]
+        jj_m:
+            bins: 120
+            range_raw: [10, 10000]
+            logbin: true
+            logx: true
+        n_jet:
+            bins: 10
+            range_raw: [2, 12]
+        n_bjet:
+            bins: 10
+            range_raw: [0, 10]
+        met:
+            bins: 120
+            range_raw: [10, 10000]
+            logbin: true
+            logx: true
+        met_sumet:
+            bins: 120
+            range_raw: [10, 10000]
+            logbin: true
+            logx: true
+        met_phi:
+            range_raw: [-3.15, 3.15]
+        met_sig:
+            range: [0, 50]
+        met_ht:
+            bins: 10
+            range: [0, 1]
+
+    jump_model_studies: true

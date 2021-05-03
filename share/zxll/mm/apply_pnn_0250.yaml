@@ -1,0 +1,28 @@
+config:
+    include:
+        - "share/zxll/mm/apply_pnn.yaml"
+
+job:
+    job_name: "mm-pnn-m0250"
+    job_type: "apply"
+    load_job_name: "mm-pnn-default"
+
+input:
+    # only remove negative events for training
+    rm_negative_weight_events: false
+    sig_key: "sig_HVTmumu_m0250"
+    cut_expression: "ll_m > 230 and ll_m < 260"
+
+apply:
+    book_history: false
+    book_kine: false
+    book_cor_matrix: false
+    book_roc: true
+    book_train_test_compare: true
+    book_mva_scores_data_mc: true
+    cfg_mva_scores_data_mc:
+        sig_list:
+            - "sig_HVTmumu_m0250"
+    book_significance_scan: true
+    book_cut_kine_study: true
+    book_importance_study: true

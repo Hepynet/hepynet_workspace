@@ -1,0 +1,61 @@
+job:
+    job_name: "emu-pnn-test"
+    job_type: "prepare"
+    save_dir: "run/test/emu"
+    rdm_seed: 91
+
+input:
+    campaign: ""
+    arr_path: "lfv/arrays"
+    arr_version: "v7"
+    channel: "emu"
+    norm_array: true
+    bkg_key: "all"
+    sig_key: "all_norm"
+    #bkg_sumofweight: 1000
+    #sig_sumofweight: 5000
+
+    bkg_list:
+        - "bkg_diboson"
+        - "bkg_zll"
+        - "bkg_top"
+        - "bkg_wjets"
+    sig_list:
+        - "sig_zpr_500"
+        - "sig_zpr_700"
+        - "sig_zpr_1000"
+        - "sig_zpr_1500"
+        - "sig_zpr_2000"
+    # basic cuts
+    cut_features:
+        - "nbjetsdl1r85"
+        - "m_ll"
+    cut_values:
+        - 0
+        - 130
+    cut_types:
+        - "="
+        - ">"
+
+    selected_features:
+        - "m_ll_p"
+        - "ele_pt"
+        - "ele_eta"
+        - "ele_phi"
+        - "ele_e"
+        - "ele_c"
+        - "mu_pt"
+        - "mu_eta"
+        - "mu_phi"
+        - "mu_e"
+        - "mu_c"
+        - "met"
+        - "met_phi"
+        - "met_mT"
+        - "pt_ll"
+        - "dr_ll"
+    validation_features:
+        - "m_ll"
+    reset_feature: true
+    reset_feature_name: "m_ll_p"
+    rm_negative_weight_events: true

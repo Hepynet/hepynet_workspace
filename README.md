@@ -1,6 +1,6 @@
 # **Hepynet Workspace**
 
-Workspace repository to do DNN studies with [hepynet](https://github.com/StarPrecursor/hepynet)
+Workspace repository to do DNN studies with [**hepynet**](https://github.com/Hepynet/hepynet)
 
 ## **Introduction**
 
@@ -11,6 +11,8 @@ Goal of the hepynet: perform DNN related high energy physics analysis tasks with
 - **Config Driven**: all tasks defined by a simple config file
 
 - **Python Based**: codes are written in Python, which is the mainstream language for DNN studies
+
+This repository setup the workspace to make use of **hepynet**.
 
 ## **Setup**
 

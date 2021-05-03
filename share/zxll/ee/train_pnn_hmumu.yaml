@@ -1,0 +1,7 @@
+config:
+    include:
+        - "share/zxll/ee/train_pnn.yaml"
+        - "share/zxll/ee/input_pnn_hmumu.yaml"
+
+job:
+    job_name: "ee-pnn-hmumu"
