@@ -1,11 +1,11 @@
 config:
     include:
-        - "share/zprime/low_mass/input.yaml"
+        - "share/zprime/eb-simpler-dnn/high_mass/input.yaml"
 
 job:
-    job_name: "train-all-mass"
+    job_name: "default-train"
     job_type: "train"
-    save_dir: "run/zprime/low_mass"
+    save_dir: "run/zprime/eb-simple-dnn/high_mass"
 
 train:
     model_name: "zprime_pdnn_model"

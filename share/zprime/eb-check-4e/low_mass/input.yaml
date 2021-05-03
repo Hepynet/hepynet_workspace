@@ -1,5 +1,5 @@
 input:
-    input_path: "zprime/data_frames/21-0120-sys/low_mass/zprime_low_m_quadtype_2.feather"
+    input_path: "zprime/data_frames/eb-check-4e/low_mass/zprime_4e_low.feather"
     norm_array: true
     bkg_key: "all"
     sig_key: "all_norm"
@@ -23,6 +23,8 @@ input:
         - "sig_Zp031"
         - "sig_Zp035"
         - "sig_Zp039"
+    data_list:
+        - "data_all"
 
     selected_features:
         - "m_truth"

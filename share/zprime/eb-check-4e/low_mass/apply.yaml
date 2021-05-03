@@ -1,15 +1,15 @@
 config:
     include:
-        - "share/zprime/low_mass/train.yaml"
+        - "share/zprime/eb-check-4e/low_mass/train.yaml"
 
 job:
-    job_name: "apply-all-mass"
+    job_name: "train_4e"
     job_type: "apply"
-    load_job_name: "train-all-mass"
+    load_job_name: "train_4e"
 
 input:
     # only remove negative events for training
-    negative_weight_process: "to_zero"
+    negative_weight_process: "keep"
     #reset_feature: false
 
 apply:
@@ -74,19 +74,20 @@ apply:
     cfg_mva_scores_data_mc:
         sig_list:
             - "sig_Zp005"
-            - "sig_Zp011"
             - "sig_Zp023"
-            - "sig_Zp031"
             - "sig_Zp039"
         bkg_list:
             - "bkg_ggZZ"
             - "bkg_qcd"
-        apply_data: false
-        apply_data_range:
+        apply_data: true
+        show_ratio: true
+        data_key: "data_all"
+        data_range:
+        sig_scale: 20
         plot_title: "MVA scores"
-        bins: 40
+        bins: 10
         range: [0, 1]
-        density: true
+        density: false
         log: true
         save_format: "png"
         use_root: false

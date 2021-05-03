@@ -1,0 +1,9 @@
+config:
+    include:
+        - "share/zprime/eb-simpler-dnn/high_mass/train_layers_02_nodes_064.yaml"
+        - "share/zprime/eb-simpler-dnn/high_mass/apply_default.yaml"
+
+job:
+    job_name: "default-studies"
+    job_type: "apply"
+    load_job_name: "train-layers-02-nodes-064"

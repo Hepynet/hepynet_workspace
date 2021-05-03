@@ -1,0 +1,13 @@
+config:
+    include:
+        - "share/zprime/eb-simpler-dnn/high_mass/input.yaml"
+        - "share/zprime/eb-simpler-dnn/high_mass/train.yaml"
+
+job:
+    job_name: "train-layers-01-nodes-064"
+    job_type: "train"
+    save_dir: "run/zprime/eb-simple-dnn/high_mass"
+
+train:
+    layers: 1
+    nodes: 64
