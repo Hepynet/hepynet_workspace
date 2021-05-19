@@ -1,0 +1,37 @@
+config:
+    include:
+        - "share/zprime/high_mass/input.yaml"
+
+job:
+    job_name: "train-all-mass"
+    job_type: "train"
+    save_dir: "run/zprime/high_mass"
+
+train:
+    model_name: "zprime_pdnn_model"
+    model_class: "Model_Sequential_Flat"
+    layers: 5
+    nodes: 128
+    dropout_rate: 0
+    momentum: 0.5
+    nesterov: true
+    test_rate: .2
+    val_split: .25
+    learn_rate: 0.0003
+    learn_rate_decay: 1.e-5
+    batch_size: 128
+    epochs: 30
+    sig_class_weight: 1.
+    bkg_class_weight: 1.
+    # early stop setups
+    use_early_stop: true
+    early_stop_paras:
+        monitor: "val_loss"
+        min_delta: 0
+        patience: 3
+        mode: "min"
+        restore_best_weights: true
+    # save model or not
+    save_model: true
+
+    verbose: 1

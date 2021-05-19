@@ -1,0 +1,18 @@
+config:
+    include:
+        - "share/zprime/study-check-train-without-1-point/high_mass/train.yaml"
+        - "share/zprime/study-check-train-without-1-point/high_mass/apply_single.yaml"
+
+job:
+    job_name: "apply-57"
+    job_type: "apply"
+    load_job_name: "train-all-mass"
+
+input:
+    sig_key: "sig_Zp057"
+    sig_list:
+        - "sig_Zp057"
+    # only remove negative events for training
+    negative_weight_process: "keep"
+    cut_expression: "mz1 > 51.663056 and mz1 < 62.336944"
+
