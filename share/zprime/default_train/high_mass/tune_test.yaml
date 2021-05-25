@@ -14,7 +14,7 @@ tune:
             time_attr: training_iteration
             max_t: 10
             grace_period: 3
-        algo_class: None
+        algo_class: HEBOSearch
         algo:
             metric: val_auc
             mode: max
@@ -24,7 +24,7 @@ tune:
             #stop:
             #val_accuracy: 0.99
             #training_iteration: 3
-            num_samples: 4
+            num_samples: 8
             resources_per_trial:
                 cpu: 1
                 gpu: 0

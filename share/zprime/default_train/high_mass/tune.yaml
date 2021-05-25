@@ -5,7 +5,7 @@ config:
 job:
     job_name: "tune-high-mass"
     job_type: "tune"
-    save_dir: "run/zprime/test"
+    save_dir: "run/zprime/default_train/high_mass"
 
 tune:
     tuner:
@@ -14,6 +14,10 @@ tune:
             time_attr: training_iteration
             max_t: 100
             grace_period: 3
+        algo_class: HEBOSearch
+        algo:
+            metric: val_auc
+            mode: max
         run:
             metric: val_auc
             mode: max
