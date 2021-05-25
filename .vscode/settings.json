@@ -5,5 +5,5 @@
         "etau",
         "mutau"
     ],
-    "python.pythonPath": "C:\\Users\\yz622\\AppData\\Local\\Programs\\Python\\Python38\\python.exe"
+    "python.pythonPath": "/home/yangz/anaconda3/envs/pyroot/bin/python"
 }
