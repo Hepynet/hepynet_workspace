@@ -1,0 +1,41 @@
+config:
+    include:
+        - "share/zprime/default_train/high_mass/input.yaml"
+    best_tune_overwrite: True
+
+job:
+    job_name: "train-all-mass-best"
+    job_type: "train"
+    tune_job_name: "tune-high-mass"
+    save_dir: "run/zprime/test"
+
+train:
+    model_name: "zprime_pdnn_model"
+    model_class: "Model_Sequential_Flat"
+    layers: 3
+    nodes: 128
+    dropout_rate: 0
+    momentum: 0.5
+    nesterov: true
+    test_rate: .2
+    val_split: .25
+    learn_rate: 0.038425
+    learn_rate_decay: 0.00012
+    batch_size: 128
+    epochs: 3
+    sig_class_weight: 2.
+    bkg_class_weight: 9.
+    train_metrics_weighted:
+        - "auc"
+    # early stop setups
+    use_early_stop: true
+    early_stop_paras:
+        monitor: "val_auc"
+        min_delta: 0
+        patience: 1
+        mode: "max"
+        restore_best_weights: true
+    # save model or not
+    save_model: true
+
+    verbose: 1
