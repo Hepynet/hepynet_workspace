@@ -1,6 +1,0 @@
-[submodule "hepynet_root_npy"]
-	path = hepynet_root_npy
-	url = https://github.com/HEPTools/hepynet_root_npy.git
-[submodule "easy_atlas_plot"]
-	path = easy_atlas_plot
-	url = https://github.com/HEPTools/easy_atlas_plot.git
