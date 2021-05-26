@@ -10,7 +10,7 @@ job:
 input:
     # only remove negative events for training
     negative_weight_process: "keep"
-    #reset_feature: false
+    reset_feature: false
 
 apply:
     plot_atlas_label: True

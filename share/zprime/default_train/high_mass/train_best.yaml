@@ -3,6 +3,9 @@ config:
         - "share/zprime/default_train/high_mass/input.yaml"
     best_tune_overwrite: True
 
+#input:
+    # cut_expression: "mz1 > 35 & mz1 < 80"
+
 job:
     job_name: "train-all-mass-best"
     job_type: "train"
@@ -22,16 +25,17 @@ train:
     learn_rate: 0.038425
     learn_rate_decay: 0.00012
     batch_size: 128
-    epochs: 3
+    epochs: 20
     sig_class_weight: 2.
     bkg_class_weight: 9.
     train_metrics_weighted:
+        - "accuracy"
         - "auc"
     # early stop setups
     use_early_stop: true
     early_stop_paras:
         monitor: "val_auc"
-        min_delta: 0
+        min_delta: 0.0005
         patience: 1
         mode: "max"
         restore_best_weights: true

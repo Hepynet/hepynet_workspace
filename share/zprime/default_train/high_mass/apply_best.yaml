@@ -6,11 +6,18 @@ job:
     job_name: "train-all-mass-best"
     job_type: "apply"
     train_job_name: "train-all-mass-best"
+    rdm_seed: 111
 
 input:
     # only remove negative events for training
     negative_weight_process: "keep"
-    #reset_feature: false
+    reset_feature: false
+    #reset_feature_overwrite: True
+    #reset_feature_overwrite_value: 75
+    #cut_expression: "mz1 > 39 & mz1 < 45"
+
+    #sig_list:
+    #    - "sig_Zp042"
 
 apply:
     plot_atlas_label: True
@@ -86,7 +93,8 @@ apply:
         plot_title: "MVA scores"
         bins: 40
         range: [0, 1]
-        density: true
+        density: false
+        sig_scale: 10
         log: true
         save_format: "png"
         use_root: false
