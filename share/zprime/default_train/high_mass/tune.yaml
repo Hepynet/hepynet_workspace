@@ -12,7 +12,7 @@ tune:
         scheduler_class: AsyncHyperBandScheduler
         scheduler:
             time_attr: training_iteration
-            max_t: 100
+            max_t: 50
             grace_period: 2
         algo_class: HEBOSearch
         algo:
@@ -22,7 +22,7 @@ tune:
         stopper_class: 
         stopper:
             metric: auc_unreset_improvement
-            metric_threshold: 0.0001
+            metric_threshold: 0.0005
             mode: max
         run:
             metric: auc_unreset
@@ -67,7 +67,7 @@ tune:
             spacer: choice
             paras:
                 categories: [32, 128, 256, 512, 1024]
-        epochs: 100
+        epochs: 50
         sig_class_weight:
             spacer: quniform
             paras:
