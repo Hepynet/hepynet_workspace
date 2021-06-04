@@ -15,24 +15,24 @@ job:
 train:
     model_name: "zprime_pdnn_model"
     model_class: "Model_Sequential_Flat"
-    layers: 3
-    nodes: 128
+    layers: 2
+    nodes: 64
     dropout_rate: 0
     momentum: 0.5
     nesterov: true
     test_rate: .2
     val_split: .25
-    learn_rate: 0.038425
-    learn_rate_decay: 0.00012
-    batch_size: 128
-    epochs: 20
-    sig_class_weight: 2.
-    bkg_class_weight: 9.
+    learn_rate: 0.0115156
+    learn_rate_decay: 0.00710462
+    batch_size: 1024
+    epochs: 50
+    sig_class_weight: 2.17531
+    bkg_class_weight: 15.842
     train_metrics_weighted:
         - "accuracy"
         - "auc"
     # early stop setups
-    use_early_stop: true
+    use_early_stop: false
     early_stop_paras:
         monitor: "val_auc"
         min_delta: 0.0005
