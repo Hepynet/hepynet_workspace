@@ -1,0 +1,22 @@
+
+config:
+    include:
+        - "share/zprime/default_train/high_mass/apply_best.yaml"
+
+job:
+    job_name: "apply_57_fixed_m_truth"
+
+input:
+    reset_feature: true
+    reset_feature_overwrite: True
+    reset_feature_overwrite_value: 57
+    cut_expression: "mz1 > 53.7978336 & mz1 < 60.2021664"
+    sig_list:
+        - "sig_Zp057"
+
+apply:
+    book_history: false
+    book_kine: false
+    book_fit_inputs: false
+    book_cut_kine_study: false
+    book_importance_study: false

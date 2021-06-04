@@ -6,7 +6,7 @@ job:
     job_name: "train-all-mass-best"
     job_type: "apply"
     train_job_name: "train-all-mass-best"
-    rdm_seed: 111
+    #rdm_seed: 111
 
 input:
     # only remove negative events for training
@@ -30,7 +30,7 @@ apply:
     #check_model_epoch: true
     epoch_check_interval: 20
 
-    book_history: true
+    #book_history: true
     cfg_history:
         accuracy:
             plot_title: "accuracy history"
@@ -39,7 +39,7 @@ apply:
             plot_title: "loss history"
             save_format: "png"
 
-    book_kine: true
+    #book_kine: true
     cfg_kine:
         separate_bkg_sig: false
         mz1:
@@ -55,20 +55,20 @@ apply:
             density: true
         save_format: "png"
 
-    book_cor_matrix: true
+    #book_cor_matrix: true
 
     # Studies depending on models
 
-    book_fit_inputs: true
+    #book_fit_inputs: true
     fit_df:
         branches:
             - "mz1"
             - "mz2"
-        save_dir: "zprime/arrays_fit/fit_df_test"
+        save_dir: "zprime/data_frames_fit/21-0120-sys-best-hyper/high_mass"
 
-    book_roc: true
+    #book_roc: true
 
-    book_train_test_compare: true
+    #book_train_test_compare: true
     cfg_train_test_compare:
         plot_title: "train/test MVA scores compare"
         bins: 25
@@ -94,16 +94,16 @@ apply:
         bins: 40
         range: [0, 1]
         density: false
-        sig_scale: 10
+        sig_scale: 50
         log: true
         save_format: "png"
         use_root: false
 
-    book_significance_scan: true
+    #book_significance_scan: true
     cfg_significance_scan:
         significance_algo: "s_sqrt_sb_rel"
 
-    book_cut_kine_study: true
+    #book_cut_kine_study: true
     cfg_cut_kine_study:
         mz1:
             x_label: "$m_{Z1}$ (normalized value for training)"
@@ -120,6 +120,6 @@ apply:
             - 0.6
             #- 0.8
 
-    book_importance_study: true
+    #book_importance_study: true
     cfg_importance_study:
         log: false
