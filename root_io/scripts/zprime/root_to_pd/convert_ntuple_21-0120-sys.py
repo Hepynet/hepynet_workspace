@@ -14,6 +14,47 @@ ntup_dir = pathlib.Path(f"/data/zprime/ntuples/21-0120-sys")
 df_dir = pathlib.Path(f"/data/zprime/data_frames/21-0120-sys")
 df_dir.mkdir(parents=True, exist_ok=True)
 
+variations = [
+    "tree_NOMINAL",
+    "tree_FT_EFF_B_systematics__1down",
+    "tree_FT_EFF_B_systematics__1up",
+    "tree_FT_EFF_C_systematics__1down",
+    "tree_FT_EFF_C_systematics__1up",
+    "tree_FT_EFF_Light_systematics__1down",
+    "tree_FT_EFF_Light_systematics__1up",
+    "tree_FT_EFF_extrapolation__1down",
+    "tree_FT_EFF_extrapolation__1up",
+    "tree_FT_EFF_extrapolation_from_charm__1down",
+    "tree_FT_EFF_extrapolation_from_charm__1up",
+    "tree_MUON_EFF_ISO_STAT__1down",
+    "tree_MUON_EFF_ISO_STAT__1up",
+    "tree_MUON_EFF_ISO_SYS__1down",
+    "tree_MUON_EFF_ISO_SYS__1up",
+    "tree_MUON_EFF_RECO_STAT__1down",
+    "tree_MUON_EFF_RECO_STAT__1up",
+    "tree_MUON_EFF_RECO_STAT_LOWPT__1down",
+    "tree_MUON_EFF_RECO_STAT_LOWPT__1up",
+    "tree_MUON_EFF_RECO_SYS__1down",
+    "tree_MUON_EFF_RECO_SYS__1up",
+    "tree_MUON_EFF_RECO_SYS_LOWPT__1down",
+    "tree_MUON_EFF_RECO_SYS_LOWPT__1up",
+    "tree_MUON_EFF_TTVA_STAT__1down",
+    "tree_MUON_EFF_TTVA_STAT__1up",
+    "tree_MUON_EFF_TTVA_SYS__1down",
+    "tree_MUON_EFF_TTVA_SYS__1up",
+    "tree_MUON_ID__1down",
+    "tree_MUON_ID__1up",
+    "tree_MUON_MS__1down",
+    "tree_MUON_MS__1up",
+    "tree_MUON_SAGITTA_RESBIAS__1down",
+    "tree_MUON_SAGITTA_RESBIAS__1up",
+    "tree_MUON_SAGITTA_RHO__1down",
+    "tree_MUON_SAGITTA_RHO__1up",
+    "tree_MUON_SCALE__1down",
+    "tree_MUON_SCALE__1up",
+    "tree_PRW_DATASF__1down",
+    "tree_PRW_DATASF__1up",
+]
 
 feature_list = [
     "PtL1",
@@ -46,6 +87,18 @@ feature_list = [
 
 feature_list_final = [f.lower() for f in feature_list]
 feature_list_final[-1] = "weight"
+
+bkg_sys_wt_list = [
+    "weight_QCD_SCALE_UP_MZ1",
+    "weight_QCD_SCALE_DOWN_MZ1",
+    "weight_QCD_SCALE_UP_MZ2",
+    "weight_QCD_SCALE_DOWN_MZ2",
+    "weight_PDF_UP_MZ1",
+    "weight_PDF_UP_MZ2",
+    "weight_ALPHA_S_UP_MZ1",
+    "weight_ALPHA_S_UP_MZ2",
+]
+bkg_sys_wt_list_final = [f.lower() for f in bkg_sys_wt_list]
 
 bkg_names = {
     "bkg_qcd": "364250_QCD",
@@ -112,12 +165,19 @@ sig_masses = {
 }
 
 # convert to pandas DataFrame
-def process_sample(sample_name, sample_path, is_sig, is_mc, m_truth_name):
-    print(f"Processing: {sample_name}")
+def process_sample(sample_name, sample_path, is_sig, is_mc, m_truth_name, variation):
+    print(f"Processing: {sample_name} (variation: {variation})")
+
+    features = feature_list[:]
+    column_names = feature_list_final[:]
+    if variation == "tree_NOMINAL" and sample_name == "bkg_qcd":
+        features += bkg_sys_wt_list
+        column_names += bkg_sys_wt_list_final
+
     sample_dfs = list()
     for chunk_pd in uproot.iterate(
-        f"{sample_path}:tree_NOMINAL",
-        feature_list,
+        f"{sample_path}:{variation}",
+        features,
         cut=f"quadtype == 2",
         library="pd",
         step_size="200 MB",
@@ -125,12 +185,12 @@ def process_sample(sample_name, sample_path, is_sig, is_mc, m_truth_name):
         mem_available = psutil.virtual_memory().available / GB
         mem_total = psutil.virtual_memory().total / GB
         print(
-            f"RAM usage {mem_available:.02f} / {mem_total:.02f} GB",
+            f"RAM available {mem_available:.02f} / {mem_total:.02f} GB",
             end="\r",
             flush=True,
         )
         # use lower case for features' names
-        chunk_pd.columns = feature_list_final
+        chunk_pd.columns = column_names
         # physic para for pNN
         if ("bkg" in sample_name) or ("data" in sample_name):
             chunk_pd = chunk_pd.assign(m_truth=chunk_pd[m_truth_name])
@@ -153,45 +213,49 @@ def process_sample(sample_name, sample_path, is_sig, is_mc, m_truth_name):
     return sample_dfs
 
 
-# low mass region
-print("## Processing low mass region")
-low_df_list = list()
 low_dir = df_dir / "low_mass"
 low_dir.mkdir(parents=True, exist_ok=True)
-## bkg
-for bkg_name, bkg_file in bkg_names.items():
-    root_path = ntup_dir / f"tree_{bkg_file}.root"
-    low_df_list += process_sample(bkg_name, root_path, False, True, "mz2")
-## sig
-for sig_name, sig_file in sig_names_low.items():
-    root_path = ntup_dir / f"tree_{sig_file}.root"
-    low_df_list += process_sample(sig_name, root_path, True, True, "mz2")
-## dump
-low_df: pd.DataFrame = pd.concat(low_df_list, ignore_index=True)
-del low_df_list
-save_path = low_dir / "zprime_low_m_quadtype_2.feather"
-print(f"## Saving to {save_path}")
-low_df.to_feather(save_path)
-del low_df
-
-# high mass region
-print("## Processing high mass region")
-high_df_list = list()
 high_dir = df_dir / "high_mass"
 high_dir.mkdir(parents=True, exist_ok=True)
-## bkg
-for bkg_name, bkg_file in bkg_names.items():
-    root_path = ntup_dir / f"tree_{bkg_file}.root"
-    high_df_list += process_sample(bkg_name, root_path, False, True, "mz1")
-## sig
-for sig_name, sig_file in sig_names_high.items():
-    root_path = ntup_dir / f"tree_{sig_file}.root"
-    high_df_list += process_sample(sig_name, root_path, True, True, "mz1")
-## dump
-high_df: pd.DataFrame = pd.concat(high_df_list, ignore_index=True)
-del high_df_list
-save_path = high_dir / "zprime_high_m_quadtype_2.feather"
-print(f"## Saving to {save_path}")
-high_df.to_feather(save_path)
-del high_df
+for var in variations:
+    # low mass region
+    print("## Processing low mass region")
+    low_df_list = list()
+    ## bkg
+    for bkg_name, bkg_file in bkg_names.items():
+        root_path = ntup_dir / f"tree_{bkg_file}.root"
+        low_df_list += process_sample(bkg_name, root_path, False, True, "mz2", var)
+    ## sig
+    for sig_name, sig_file in sig_names_low.items():
+        root_path = ntup_dir / f"tree_{sig_file}.root"
+        low_df_list += process_sample(sig_name, root_path, True, True, "mz2", var)
+    ## dump
+    low_df: pd.DataFrame = pd.concat(low_df_list, ignore_index=True)
+    del low_df_list
+    save_dir = low_dir / var
+    save_dir.mkdir(parents=True, exist_ok=True)
+    save_path = save_dir / "zprime_low_m_quadtype_2.feather"
+    print(f"## Saving to {save_path}")
+    low_df.to_feather(save_path)
+    del low_df
 
+    # high mass region
+    print("## Processing high mass region")
+    high_df_list = list()
+    ## bkg
+    for bkg_name, bkg_file in bkg_names.items():
+        root_path = ntup_dir / f"tree_{bkg_file}.root"
+        high_df_list += process_sample(bkg_name, root_path, False, True, "mz1", var)
+    ## sig
+    for sig_name, sig_file in sig_names_high.items():
+        root_path = ntup_dir / f"tree_{sig_file}.root"
+        high_df_list += process_sample(sig_name, root_path, True, True, "mz1", var)
+    ## dump
+    high_df: pd.DataFrame = pd.concat(high_df_list, ignore_index=True)
+    del high_df_list
+    save_dir = high_dir / var
+    save_dir.mkdir(parents=True, exist_ok=True)
+    save_path = save_dir / "zprime_high_m_quadtype_2.feather"
+    print(f"## Saving to {save_path}")
+    high_df.to_feather(save_path)
+    del high_df
