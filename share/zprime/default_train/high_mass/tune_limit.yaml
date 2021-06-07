@@ -3,7 +3,7 @@ config:
         - "share/zprime/default_train/high_mass/input.yaml"
 
 job:
-    job_name: "tune-high-mass"
+    job_name: "tune-limit"
     job_type: "tune"
     save_dir: "run/zprime/default_train/high_mass"
 
@@ -16,21 +16,18 @@ tune:
             grace_period: 2
         algo_class: HEBOSearch
         algo:
-            metric: auc_unreset
-            mode: max
+            metric: min_limit
+            mode: min
             max_concurrent: 16
-        stopper_class: 
+        stopper_class: TrialPlateauStopper
         stopper:
-            metric: auc_unreset_improvement
-            metric_threshold: 0.0005
-            mode: max
+            metric: min_limit_delta
+            metric_threshold: -0.005
+            mode: min
         run:
-            metric: auc_unreset
-            mode: max
-            #stop:
-            #val_accuracy: 0.99
-            #training_iteration: 3
-            num_samples: 1000
+            metric: min_limit
+            mode: min
+            num_samples: 300
             resources_per_trial:
                 cpu: 1
                 gpu: 0
@@ -90,3 +87,16 @@ tune:
         custom_tune_metrics_weighted:
             - auc_unreset
             - auc_unreset_delta
+            - min_limit
+            - min_limit_delta
+    metric_min_limit:
+        sig_list: ["sig_Zp075"]
+        bkg_list: ["bkg_qcd", "bkg_ggZZ"]
+        sig_scale: 5
+        bkg_scale: 5
+        fit_var: "mz1"
+        cut_expression: "mz1 > 70.77 & mz1 < 79.23"
+        bins: 5
+        range: [70.77, 79.23]
+        dnn_scan_space: [0, 10, 101]
+        poi_scan_space: [0, 10, 101]

@@ -32,7 +32,7 @@ tune:
             #stop:
             #val_accuracy: 0.99
             #training_iteration: 3
-            num_samples: 16
+            num_samples: 2
             resources_per_trial:
                 cpu: 1
                 gpu: 0
