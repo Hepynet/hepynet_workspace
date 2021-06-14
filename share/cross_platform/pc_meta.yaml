@@ -22,3 +22,6 @@ platform_meta:
     "gpuatum05":
         "Linux-3.10.0-1127.19.1.el7.x86_64-x86_64-with-glibc2.10":
             "data_path": "/net/s3_datae/yangz"
+    "pcatum04":
+        "Linux-3.10.0-1160.25.1.el7.x86_64-x86_64-with-glibc2.10":
+            "data_path": "/net/s3_datae/yangz"

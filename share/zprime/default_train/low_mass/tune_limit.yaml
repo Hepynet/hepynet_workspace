@@ -1,0 +1,102 @@
+config:
+    include:
+        - "share/zprime/default_train/low_mass/input.yaml"
+
+job:
+    job_name: "tune-limit"
+    job_type: "tune"
+    save_dir: "run/zprime/default_train/low_mass"
+
+tune:
+    tuner:
+        scheduler_class: AsyncHyperBandScheduler
+        scheduler:
+            time_attr: training_iteration
+            max_t: 50
+            grace_period: 2
+        algo_class: HEBOSearch
+        algo:
+            metric: min_limit
+            mode: min
+            max_concurrent: 16
+        stopper_class: TrialPlateauStopper
+        stopper:
+            metric: min_limit_delta
+            metric_threshold: -0.005
+            mode: min
+        run:
+            metric: min_limit
+            mode: min
+            num_samples: 300
+            resources_per_trial:
+                cpu: 1
+                gpu: 0
+            log_to_file: true
+    model_class: "Model_Sequential_Flat"
+    model:
+        layers:
+            spacer: randint
+            paras:
+                lower: 2
+                upper: 8
+        nodes:
+            spacer: choice
+            paras:
+                categories: [16, 32, 64, 128, 256]
+        dropout_rate: 0
+        momentum: 0.5
+        nesterov: true
+        test_rate: .2
+        val_split: .25
+        learn_rate:
+            spacer: qloguniform
+            paras:
+                lower: 1.e-5
+                upper: 1
+                q: 5.e-6
+        learn_rate_decay:
+            spacer: qloguniform
+            paras:
+                lower: 1.e-5
+                upper: 0.01
+                q: 5.e-6
+        batch_size:
+            spacer: choice
+            paras:
+                categories: [32, 128, 256, 512, 1024]
+        epochs: 50
+        sig_class_weight:
+            spacer: quniform
+            paras:
+                lower: 1
+                upper: 10
+                q: 1
+        bkg_class_weight:
+            spacer: quniform
+            paras:
+                lower: 1
+                upper: 20
+                q: 1
+        #use_early_stop: true
+        early_stop_paras:
+            monitor: "val_auc"
+            min_delta: 0.0005
+            patience: 3
+            mode: "max"
+            restore_best_weights: true
+        custom_tune_metrics_weighted:
+            - auc_unreset
+            - auc_unreset_delta
+            - min_limit
+            - min_limit_delta
+    metric_min_limit:
+        sig_list: ["sig_Zp039"]
+        bkg_list: ["bkg_qcd", "bkg_ggZZ"]
+        sig_scale: 5
+        bkg_scale: 5
+        fit_var: "mz2"
+        cut_expression: "mz2 > 36.83 & mz2 < 41.17"
+        bins: 5
+        range: [36.83, 41.17]
+        dnn_scan_space: [0, 10, 101]
+        poi_scan_space: [0, 10, 101]

@@ -1,6 +1,6 @@
 config:
     include:
-        - "share/zprime/default_train/high_mass/train_best_limit.yaml"
+        - "share/zprime/default_train/low_mass/train_best_limit.yaml"
 
 job:
     job_name: "all-mass"
@@ -46,11 +46,11 @@ apply:
         m_truth:
             x_label: $m_{truth} [GeV]$
             bins: 80
-            range_raw: [20, 110]
+            range_raw: [0, 60]
 
         mz1:
             x_label: $m_{Z_1} [GeV]$
-            range_raw: [20, 110]
+            range_raw: [0, 110]
         mz2:
             x_label: $m_{Z_2} [GeV]$
             range_raw: [0, 100]
@@ -113,6 +113,7 @@ apply:
         hist_kwargs_bkg:
             histtype: "stepfilled"
             density: true
+
         save_format: "png"
 
     book_cor_matrix: true
@@ -124,7 +125,7 @@ apply:
         branches:
             - "mz1"
             - "mz2"
-        save_dir: "zprime/data_frames_fit/21-0120-sys-best-hyper/high_mass"
+        save_dir: "zprime/data_frames_fit/21-0120-sys-best-hyper/low_mass"
 
     book_roc: true
 
@@ -140,11 +141,11 @@ apply:
     book_mva_scores_data_mc: true
     cfg_mva_scores_data_mc:
         sig_list:
-            - "sig_Zp042"
-            - "sig_Zp051"
-            - "sig_Zp060"
-            - "sig_Zp069"
-            - "sig_Zp075"
+            - "sig_Zp005"
+            - "sig_Zp011"
+            - "sig_Zp017"
+            - "sig_Zp027"
+            - "sig_Zp039"
         bkg_list:
             - "bkg_ggZZ"
             - "bkg_qcd"
@@ -154,7 +155,7 @@ apply:
         bins: 40
         range: [0, 1]
         density: false
-        sig_scale: 50
+        sig_scale: 20
         log: true
         save_format: "png"
         use_root: false

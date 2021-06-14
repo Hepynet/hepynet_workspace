@@ -1,0 +1,22 @@
+
+config:
+    include:
+        - "share/zprime/default_train/low_mass/apply_best_limit.yaml"
+
+job:
+    job_name: "apply_11"
+
+input:
+    # only remove negative events for training
+    negative_weight_process: "keep"
+    reset_feature: false
+    cut_expression: "mz2 > 10.4311772 & mz2 < 11.5688228"
+    sig_list:
+        - "sig_Zp011"
+
+apply:
+    book_history: false
+    book_kine: false
+    book_fit_inputs: false
+    book_cut_kine_study: false
+    book_importance_study: false
