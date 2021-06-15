@@ -1,0 +1,18 @@
+
+config:
+    include:
+        - "share/zprime/master/default/low_mass/train.yaml"
+        - "share/zprime/apply/apply_lm_single.sec.yaml"
+
+job:
+    job_name: "apply_11"
+    job_type: "apply"
+    train_job_name: "default_train"
+
+input:
+    # only remove negative events for training
+    negative_weight_process: "keep"
+    reset_feature: false
+    cut_expression: "mz2 > 10.051962 & mz2 < 11.948038"
+    sig_list:
+        - "sig_Zp011"

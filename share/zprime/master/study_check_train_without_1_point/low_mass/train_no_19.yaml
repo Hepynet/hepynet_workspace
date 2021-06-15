@@ -1,0 +1,13 @@
+config:
+    include:
+        - "share/zprime/input/input_lm_no_19.sec.yaml"
+        - "share/zprime/train/train_lm.sec.yaml"
+
+job:
+    job_name: "train_no_19"
+    job_type: "train"
+    save_dir: "run/zprime/train_without_1_point/low_mass"
+
+input:
+    bkg_sumofweight: 800875
+    sig_sumofweight: 991550

@@ -1,0 +1,9 @@
+config:
+    include:
+        - "share/zprime/input/input_4e_lm.sec.yaml"
+        - "share/zprime/train/train_lm.sec.yaml"
+
+job:
+    job_name: "train_4e"
+    job_type: "train"
+    save_dir: "run/zprime/eb-check-4e/low_mass"

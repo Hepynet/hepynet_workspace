@@ -1,9 +1,0 @@
-config:
-    include:
-        - "share/zprime/high_mass/apply.yaml"
-        - "share/zprime/high_mass/train_no_63.yaml"
-
-job:
-    job_name: "apply-no-63"
-    job_type: "apply"
-    load_job_name: "train-no-63"

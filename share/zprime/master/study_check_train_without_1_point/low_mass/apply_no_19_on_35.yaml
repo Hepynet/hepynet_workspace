@@ -1,0 +1,18 @@
+config:
+    include:
+        - "share/zprime/master/study_check_train_without_1_point/low_mass/train_no_19.yaml"
+        - "share/zprime/apply/apply_lm_single.sec.yaml"
+
+job:
+    job_name: "apply_35"
+    job_type: "apply"
+    train_job_name: "train_no_19"
+
+input:
+    # only remove negative events for training
+    negative_weight_process: "keep"
+    reset_feature: false
+    cut_expression: "mz2 > 31.762098 and mz2 < 38.237902"
+    sig_list:
+        - "sig_Zp035"
+

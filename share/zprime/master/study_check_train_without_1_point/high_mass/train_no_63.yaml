@@ -1,0 +1,13 @@
+config:
+    include:
+        - "share/zprime/input/input_hm_no_63.sec.yaml"
+        - "share/zprime/train/train_hm.sec.yaml"
+
+job:
+    job_name: "train_no_63"
+    job_type: "train"
+    save_dir: "run/zprime/train_without_1_point/high_mass"
+
+input:
+    bkg_sumofweight: 1906250
+    sig_sumofweight: 103972

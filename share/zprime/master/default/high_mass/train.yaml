@@ -1,0 +1,15 @@
+# currently, using hyperparameters optimized on limit@75GeV
+
+config:
+    include:
+        - "share/zprime/input/input_hm.sec.yaml"
+        - "share/zprime/train/train_hm.sec.yaml"
+
+job:
+    job_name: "default_train"
+    job_type: "train"
+    save_dir: "run/zprime/default_train/high_mass"
+
+input:
+    bkg_sumofweight: 1906250
+    sig_sumofweight: 103972

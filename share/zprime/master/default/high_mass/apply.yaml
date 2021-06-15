@@ -1,0 +1,15 @@
+config:
+    include:
+        - "share/zprime/master/default/high_mass/train.yaml"
+        - "share/zprime/apply/apply_hm.sec.yaml"
+
+job:
+    job_name: "all_mass"
+    job_type: "apply"
+    train_job_name: "default_train"
+
+input:
+    # only remove negative events for training
+    negative_weight_process: "keep"
+    # don't reset background events' physic parameter when apply pDNN
+    reset_feature: false

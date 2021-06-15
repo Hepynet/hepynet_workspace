@@ -1,0 +1,14 @@
+config:
+    include:
+        - "share/zprime/master/study_check_train_without_1_point/high_mass/train_no_63.yaml"
+        - "share/zprime/apply/apply_hm.sec.yaml"
+
+job:
+    job_name: "all_mass"
+    job_type: "apply"
+    train_job_name: "train_no_63"
+
+input:
+    # only remove negative events for training
+    negative_weight_process: "keep"
+    reset_feature: false

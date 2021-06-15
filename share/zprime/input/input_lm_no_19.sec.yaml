@@ -1,0 +1,21 @@
+# remove signal mass point 19 GeV from input list
+
+config:
+    include:
+        - "share/zprime/input/input_lm.sec.yaml"
+
+input:
+    sig_list:
+        - "sig_Zp005"
+        - "sig_Zp007"
+        - "sig_Zp009"
+        - "sig_Zp011"
+        - "sig_Zp013"
+        - "sig_Zp015"
+        - "sig_Zp017"
+        #- "sig_Zp019"
+        - "sig_Zp023"
+        - "sig_Zp027"
+        - "sig_Zp031"
+        - "sig_Zp035"
+        - "sig_Zp039"
