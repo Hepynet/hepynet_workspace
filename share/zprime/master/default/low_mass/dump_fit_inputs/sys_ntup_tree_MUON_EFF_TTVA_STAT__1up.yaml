@@ -1,0 +1,23 @@
+config:
+    include:
+        - "share/zprime/master/default/low_mass/train.yaml"
+
+job:
+    job_name: "dump_ntup_sys_tree_MUON_EFF_TTVA_STAT__1up"
+    job_type: "apply"
+    train_job_name: "default_train"
+
+input:
+    input_path: "zprime/data_frames/21-0120-sys/low_mass/tree_MUON_EFF_TTVA_STAT__1up/zprime_low_m_quadtype_2.feather"
+    negative_weight_process: "keep"
+    reset_feature: false
+
+
+apply:
+    book_fit_inputs: true
+    fit_df:
+        branches:
+            - "mz1"
+            - "mz2"
+        save_dir: "zprime/data_frames_fit/21-0120-sys-best-limit/low_mass/tree_MUON_EFF_TTVA_STAT__1up"
+

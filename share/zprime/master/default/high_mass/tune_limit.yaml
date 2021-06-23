@@ -1,6 +1,6 @@
 config:
     include:
-        - "share/zprime/default_train/high_mass/input.yaml"
+        - "share/zprime/input/input_hm.sec.yaml"
 
 job:
     job_name: "tune-limit"
@@ -22,12 +22,12 @@ tune:
         stopper_class: TrialPlateauStopper
         stopper:
             metric: min_limit_delta
-            metric_threshold: -0.005
+            metric_threshold: 0
             mode: min
         run:
             metric: min_limit
             mode: min
-            num_samples: 300
+            num_samples: 500
             resources_per_trial:
                 cpu: 1
                 gpu: 0
@@ -43,8 +43,18 @@ tune:
             spacer: choice
             paras:
                 categories: [16, 32, 64, 128, 256]
-        dropout_rate: 0
-        momentum: 0.5
+        dropout_rate:
+            spacer: quniform
+            paras:
+                lower: 0
+                upper: 0.9
+                q: 0.1
+        momentum:
+            spacer: quniform
+            paras:
+                lower: 0
+                upper: 0.9
+                q: 0.1
         nesterov: true
         test_rate: .2
         val_split: .25
@@ -64,7 +74,7 @@ tune:
             spacer: choice
             paras:
                 categories: [32, 128, 256, 512, 1024]
-        epochs: 50
+        epochs: 30
         sig_class_weight:
             spacer: quniform
             paras:
