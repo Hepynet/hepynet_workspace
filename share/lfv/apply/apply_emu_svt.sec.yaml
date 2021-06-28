@@ -1,0 +1,15 @@
+config:
+    include:
+        - "share/lfv/apply/apply_emu.sec.yaml"
+
+apply:
+    cfg_mva_scores_data_mc:
+        sig_list:
+            - "sig_svt_500"
+            - "sig_svt_700"
+            - "sig_svt_1000"
+            - "sig_svt_1500"
+            - "sig_svt_2000"
+            #- "sig_svt_4000"
+            #- "sig_svt_6000"
+            #- "sig_svt_8000"

@@ -1,0 +1,34 @@
+train:
+    model_name: "lfv_pdnn_model"
+    model_class: "Model_Sequential_Flat"
+    layers: 5
+    nodes: 256
+    dropout_rate: 0
+    momentum: 0.5
+    nesterov: true
+    test_rate: .1
+    val_split: .1
+    k_folds: 5
+    learn_rate: 0.005
+    learn_rate_decay: 1.e-5
+    batch_size: 64
+    epochs: 50
+
+    # in older tensorflow version may use "acc"
+    train_metrics_weighted:
+        - "accuracy"
+        - "auc"
+
+    # early stop setups
+    use_early_stop: true
+    early_stop_paras:
+        monitor: "val_auc"
+        min_delta: 0.0002
+        patience: 2
+        mode: "max"
+        restore_best_weights: true
+
+    # save model or not
+    save_model: true
+
+    verbose: 1

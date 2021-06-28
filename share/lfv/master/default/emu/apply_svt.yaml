@@ -1,0 +1,15 @@
+config:
+    include:
+        - "share/lfv/master/default/emu/train_svt.yaml"
+        - "share/lfv/apply/apply_emu_svt.sec.yaml"
+
+job:
+    job_name: "all_mass"
+    job_type: "apply"
+    train_job_name: "train_svt"
+
+input:
+    # only remove negative events for training
+    negative_weight_process: "keep"
+    # don't reset background events' physic parameter when apply pDNN
+    reset_feature: false

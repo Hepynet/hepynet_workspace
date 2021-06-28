@@ -1,0 +1,9 @@
+config:
+    include:
+        - "share/lfv/input/input_emu_zprime.sec.yaml"
+        - "share/lfv/train/train_emu_zprime.sec.yaml"
+
+job:
+    job_name: "train_zprime"
+    job_type: "train"
+    save_dir: "run/lfv/default/emu"

@@ -1,0 +1,9 @@
+config:
+    include:
+        - "share/lfv/input/input_emu_svt.sec.yaml"
+        - "share/lfv/train/train_emu_svt.sec.yaml"
+
+job:
+    job_name: "train_svt"
+    job_type: "train"
+    save_dir: "run/lfv/default/emu"
