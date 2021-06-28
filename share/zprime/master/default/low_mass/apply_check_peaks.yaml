@@ -1,0 +1,36 @@
+config:
+    include:
+        - "share/zprime/master/default/low_mass/train.yaml"
+
+job:
+    job_name: "check_peaks"
+    job_type: "apply"
+    train_job_name: "default_train"
+
+input:
+    # only remove negative events for training
+    negative_weight_process: "keep"
+    # don't reset background events' physic parameter when apply pDNN
+    reset_feature: false
+
+apply:
+    plot_atlas_label: True
+    atlas_label:
+        status: "wip"
+        #simulation: "true"
+        energy: "13 TeV"
+        lumi: 139
+
+    book_cut_kine_study: true
+    cfg_cut_kine_study:
+        bins: 40
+        range:
+        histtype: "stepfilled"
+        alpha: 0.3
+        density: true
+        save_format: "png"
+        save_ratio_table: true
+        dnn_cut_list:
+            - [0, 0.6]
+            - [0.6, 0.9]
+            - [0.9, 1]

@@ -1,0 +1,30 @@
+
+config:
+    include:
+        - "share/zprime/master/default/high_mass/train.yaml"
+
+job:
+    job_name: "dnn_impact_63"
+    job_type: "apply"
+    train_job_name: "default_train"
+
+input:
+    # only remove negative events for training
+    negative_weight_process: "keep"
+    reset_feature: false
+    cut_expression: "mz1 > 57.09059 & mz1 < 68.90941"
+    sig_list:
+        - "sig_Zp063"
+
+apply:
+    book_cut_kine_study: true
+    cfg_cut_kine_study:
+        bins: 40
+        range:
+        histtype: "stepfilled"
+        alpha: 0.3
+        density: true
+        save_format: "png"
+        save_ratio_table: true
+        dnn_cut_list:
+            - 0.14
