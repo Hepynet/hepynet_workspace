@@ -1,0 +1,15 @@
+config:
+    include:
+        - "share/lfv/master/default/emu/train_qbh_n1.yaml"
+        - "share/lfv/apply/apply_emu_qbh_n1.sec.yaml"
+
+job:
+    job_name: "all_mass"
+    job_type: "apply"
+    train_job_name: "train_qbh_n1"
+
+input:
+    # only remove negative events for training
+    negative_weight_process: "keep"
+    # don't reset background events' physic parameter when apply pDNN
+    reset_feature: false

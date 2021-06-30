@@ -3,8 +3,8 @@ train:
     model_class: "Model_Sequential_Flat"
     layers: 5
     nodes: 256
-    dropout_rate: 0
-    momentum: 0.5
+    dropout_rate: 0.3
+    momentum: 0.9
     nesterov: true
     test_rate: .1
     val_split: .1
@@ -22,10 +22,10 @@ train:
     # early stop setups
     use_early_stop: true
     early_stop_paras:
-        monitor: "val_auc"
-        min_delta: 0.0002
+        monitor: "val_loss"
+        min_delta: 0
         patience: 2
-        mode: "max"
+        mode: "min"
         restore_best_weights: true
 
     # save model or not

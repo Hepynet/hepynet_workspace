@@ -1,0 +1,51 @@
+input:
+    input_path: "lfv/data_frames/v8/lfv_emu.feather"
+    norm_array: true
+    bkg_key: "all"
+    sig_key: "all_norm"
+    bkg_sumofweight: 100000
+    sig_sumofweight: 100000
+
+    bkg_list:
+        - "bkg_diboson"
+        - "bkg_zll"
+        - "bkg_top"
+        - "bkg_wjets"
+    sig_list:
+        - "sig_qbh_n1_2000"
+        - "sig_qbh_n1_2500"
+        - "sig_qbh_n1_3000"
+        #- "sig_qbh_n1_3500"
+        #- "sig_qbh_n1_4000"
+        #- "sig_qbh_n1_4500"
+        #- "sig_qbh_n1_5000"
+        #- "sig_qbh_n1_5500"
+        #- "sig_qbh_n1_6000"
+        #- "sig_qbh_n1_6500"
+        #- "sig_qbh_n1_7000"
+    cut_expression: "ll_m > 130"
+
+    selected_features:
+        - "m_truth"
+        - "ele_pt"
+        - "ele_eta"
+        - "ele_phi"
+        - "ele_e"
+        - "ele_c"
+        - "mu_pt"
+        - "mu_eta"
+        - "mu_phi"
+        - "mu_e"
+        - "mu_c"
+        - "met_et"
+        - "met_phi"
+        - "ll_dphi"
+        - "ll_met_dphi"
+        - "ll_y"
+        - "ll_phi"
+        - "ll_m"
+        - "ll_pt"
+
+    reset_feature: true
+    reset_feature_name: "m_truth"
+    rm_negative_weight_events: true

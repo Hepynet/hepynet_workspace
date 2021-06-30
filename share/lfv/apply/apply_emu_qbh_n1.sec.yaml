@@ -1,0 +1,18 @@
+config:
+    include:
+        - "share/lfv/apply/apply_emu.sec.yaml"
+
+apply:
+    cfg_mva_scores_data_mc:
+        sig_list:
+            - "sig_qbh_n1_2000"
+            - "sig_qbh_n1_2500"
+            - "sig_qbh_n1_3000"
+            #- "sig_qbh_n1_3500"
+            #- "sig_qbh_n1_4000"
+            #- "sig_qbh_n1_4500"
+            #- "sig_qbh_n1_5000"
+            #- "sig_qbh_n1_5500"
+            #- "sig_qbh_n1_6000"
+            #- "sig_qbh_n1_6500"
+            #- "sig_qbh_n1_7000"

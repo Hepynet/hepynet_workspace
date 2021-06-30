@@ -79,7 +79,7 @@ apply:
         bins: 40
         range: [0, 1]
         density: false
-        bkg_scale: 100
+        bkg_scale: 500
         #sig_scale: 1
         log: true
         save_format: "png"

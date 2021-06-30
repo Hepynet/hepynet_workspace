@@ -1,0 +1,29 @@
+config:
+    include:
+        - "share/lfv/input/input_emu_svt.sec.yaml"
+
+input:
+    input_path: "lfv/data_frames/v8/lfv_etau.feather"
+
+    selected_features:
+        - "m_truth"
+        - "ele_pt"
+        - "ele_eta"
+        - "ele_phi"
+        - "ele_e"
+        - "ele_c"
+        - "tau_pt"
+        - "tau_eta"
+        - "tau_phi"
+        - "tau_e"
+        - "tau_c"
+        - "tau_ntracks"
+        - "met_et"
+        - "met_phi"
+        - "m_t"
+        - "ll_dphi"
+        - "ll_met_dphi"
+        - "ll_y"
+        - "ll_phi"
+        - "ll_m"
+        - "ll_pt"

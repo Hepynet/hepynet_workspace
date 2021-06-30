@@ -24,7 +24,7 @@ train:
     early_stop_paras:
         monitor: "val_loss"
         min_delta: 0
-        patience: 2
+        patience: 3
         mode: "min"
         restore_best_weights: true
 
