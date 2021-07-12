@@ -3,13 +3,13 @@ train:
     model_class: "Model_Sequential_Flat"
     layers: 5
     nodes: 256
-    dropout_rate: 0.3
+    dropout_rate: 0.2
     momentum: 0.9
     nesterov: true
     test_rate: .1
     val_split: .1
     k_folds: 5
-    learn_rate: 0.005
+    learn_rate: 0.001
     learn_rate_decay: 1.e-5
     batch_size: 64
     epochs: 50
