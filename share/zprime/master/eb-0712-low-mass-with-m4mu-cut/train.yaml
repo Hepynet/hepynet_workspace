@@ -1,0 +1,16 @@
+# currently, using hyperparameters optimized on limit@39GeV
+
+config:
+    include:
+        - "share/zprime/input/input_lm.sec.yaml"
+        - "share/zprime/train/train_lm.sec.yaml"
+
+job:
+    job_name: "train_m4mu_cut"
+    job_type: "train"
+    save_dir: "run/zprime/eb_0712_low_mass_with_m4mu_cut"
+
+input:
+    bkg_sumofweight: 800875
+    sig_sumofweight: 991550
+    cut_expression: "mzz < 120"
