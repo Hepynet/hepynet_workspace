@@ -24,6 +24,8 @@ input:
         - "sig_Zp069"
         - "sig_Zp072"
         - "sig_Zp075"
+    data_list:
+        - "data_all"
 
     selected_features:
         - "m_truth"

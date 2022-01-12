@@ -20,3 +20,7 @@ apply:
     book_significance_scan: true
     cfg_significance_scan:
         significance_algo: "s_sqrt_b_rel"
+
+    book_importance_study: true
+    cfg_importance_study:
+        log: false

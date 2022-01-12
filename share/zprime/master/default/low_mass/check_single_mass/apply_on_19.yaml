@@ -13,6 +13,6 @@ input:
     # only remove negative events for training
     negative_weight_process: "keep"
     reset_feature: false
-    cut_expression: "mz2 > 17.288674 & mz2 < 20.711326"
+    cut_expression: "mz2 > 18.15595 & mz2 < 19.84405"
     sig_list:
         - "sig_Zp019"

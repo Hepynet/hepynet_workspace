@@ -22,7 +22,7 @@ input:
 apply:
     plot_atlas_label: True
     atlas_label:
-        status: "wip"
+        status: "internal"
         simulation: "true"
         energy: "13 TeV"
         lumi: 139

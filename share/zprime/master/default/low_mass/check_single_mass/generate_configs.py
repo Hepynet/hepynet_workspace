@@ -25,7 +25,7 @@ low_mass_points = [5, 7, 9, 11, 13, 15, 17, 19, 23, 27, 31, 35, 39]
 
 
 def get_mass_cut(mass):
-    sigma_range = 5.0 * (-0.0202966 + 0.0190822 * mass)
+    sigma_range = 3.0 * (0.193 - 0.002 * mass + 0.00035 * mass * mass) 
     return (mass - sigma_range, mass + sigma_range)
 
 

@@ -1,0 +1,31 @@
+config:
+  include:
+    - "share/zprime/master/default/high_mass/train.yaml"
+    - "share/zprime/apply/apply_hm.sec.yaml"
+
+job:
+  job_name: "dev_test"
+  job_type: "apply"
+  train_job_name: "default_train"
+
+input:
+  # only remove negative events for training
+  negative_weight_process: "keep"
+  # don't reset background events' physic parameter when apply pDNN
+  reset_feature: false
+
+apply:
+  book_history: false
+  book_kine: false
+  book_cor_matrix: false
+  book_fit_inputs: false
+
+  #sample_large_inputs: false
+  #metric_max_events: 1000
+  book_roc: true
+
+  book_train_test_compare: false
+  book_mva_scores_data_mc: false
+  book_significance_scan: false
+  book_cut_kine_study: false
+  book_importance_study: false

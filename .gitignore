@@ -1,4 +1,7 @@
 *.png
+*.pdf
+*.eps
+*.svg
 
 .vscode
 run/*

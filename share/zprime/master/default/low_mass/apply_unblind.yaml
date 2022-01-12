@@ -1,0 +1,49 @@
+config:
+    include:
+        - "share/zprime/master/default/low_mass/train.yaml"
+        - "share/zprime/input/input_lm_unblind.sec.yaml"
+
+job:
+    job_name: "all_mass_unblind"
+    job_type: "apply"
+    train_job_name: "default_train"
+
+input:
+    # only remove negative events for training
+    negative_weight_process: "keep"
+    # don't reset background events' physic parameter when apply pDNN
+    reset_feature: false
+    #cut_expression: "m_truth < 40"
+
+apply:
+    plot_atlas_label: True
+    atlas_label:
+        status: "internal"
+        #simulation: "true"
+        energy: "13 TeV"
+        lumi: 139
+    
+    book_mva_scores_data_mc: true
+    cfg_mva_scores_data_mc:
+        fig_size: [8.333, 8.333]
+        sig_list:
+            - "sig_Zp015:Z'(15 GeV)"
+            - "sig_Zp035:Z'(35 GeV)"
+        bkg_list:
+            - "bkg_fakes_data:other"
+            - "bkg_ggZZ+bkg_qcd+bkg_fakes_diboson:SM ZZ"
+        data_key: "data_all"
+        apply_data: true
+        apply_data_range:
+        plot_title: "MVA scores"
+        bins: 20
+        range: [0, 1]
+        density: false
+        show_ratio: true
+        legend_paras:
+            loc: "upper right"
+            ncol: 1
+        sig_scale: 50
+        log: true
+        logy_min: 0.1
+        save_format: "png"

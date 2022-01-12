@@ -151,6 +151,10 @@ def plot_brazilian(plot_config, times_xsec=False):
         legend.SetBorderSize(0)
         legend.SetTextSize(0.041)
         legend.SetTextFont(42)
+        if parse_float_list(plot_config, "INPUT", "upper_limits_observed") and parse_bool(
+            plot_config, "PLOT", "plot_obs"
+        ):
+            legend.AddEntry(observed_line, "Observed limit", "f")
         legend.AddEntry(median_line, "Expected limit", "L")
         legend.AddEntry(band_1sig, "Expected #pm 1#sigma", "f")
         legend.AddEntry(band_2sig, "Expected #pm 2#sigma", "f")

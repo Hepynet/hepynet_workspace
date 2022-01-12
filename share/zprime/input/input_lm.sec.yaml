@@ -11,6 +11,8 @@ input:
     bkg_list:
         - "bkg_qcd"
         - "bkg_ggZZ"
+        - "bkg_fakes_data"
+        - "bkg_fakes_diboson"
     sig_list:
         - "sig_Zp005"
         - "sig_Zp007"

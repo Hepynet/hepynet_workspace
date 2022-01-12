@@ -1,0 +1,21 @@
+
+config:
+    include:
+        - "share/zprime/master/eb-0712-low-mass-with-m4mu-cut/train.yaml"
+        - "share/zprime/apply/apply_lm_single.sec.yaml"
+
+job:
+    job_name: "apply_27"
+    job_type: "apply"
+    train_job_name: "train_m4mu_cut"
+
+input:
+    # only remove negative events for training
+    negative_weight_process: "keep"
+    reset_feature: false
+    cut_expression: "mz2 > 24.525386 & mz2 < 29.474614"
+    sig_list:
+        - "sig_Zp027"
+
+apply:
+    book_importance_study: true

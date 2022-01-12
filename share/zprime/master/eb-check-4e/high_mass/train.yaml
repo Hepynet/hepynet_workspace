@@ -7,3 +7,7 @@ job:
     job_name: "train_4e"
     job_type: "train"
     save_dir: "run/zprime/eb-check-4e/high_mass"
+
+input:
+    bkg_sumofweight: 1906250
+    sig_sumofweight: 103972
