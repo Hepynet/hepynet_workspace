@@ -1,3 +1,4 @@
+from calendar import c
 import pathlib
 import sys
 
@@ -10,10 +11,50 @@ GB = MB * 1024
 
 # setups
 ntup_dir = pathlib.Path(f"/data/zprime/ntuples/21-0120-sys")
-df_dir = pathlib.Path(f"/data/zprime/data_frames/21-0120-sys")
+df_dir = pathlib.Path(f"/data/zprime/data_frames/22-0120-sys")
 df_dir.mkdir(parents=True, exist_ok=True)
 
-variations = ["tree_NOMINAL"]
+variations = [
+    "tree_NOMINAL",
+    "tree_FT_EFF_B_systematics__1down",
+    "tree_FT_EFF_B_systematics__1up",
+    "tree_FT_EFF_C_systematics__1down",
+    "tree_FT_EFF_C_systematics__1up",
+    "tree_FT_EFF_Light_systematics__1down",
+    "tree_FT_EFF_Light_systematics__1up",
+    "tree_FT_EFF_extrapolation__1down",
+    "tree_FT_EFF_extrapolation__1up",
+    "tree_FT_EFF_extrapolation_from_charm__1down",
+    "tree_FT_EFF_extrapolation_from_charm__1up",
+    "tree_MUON_EFF_ISO_STAT__1down",
+    "tree_MUON_EFF_ISO_STAT__1up",
+    "tree_MUON_EFF_ISO_SYS__1down",
+    "tree_MUON_EFF_ISO_SYS__1up",
+    "tree_MUON_EFF_RECO_STAT__1down",
+    "tree_MUON_EFF_RECO_STAT__1up",
+    "tree_MUON_EFF_RECO_STAT_LOWPT__1down",
+    "tree_MUON_EFF_RECO_STAT_LOWPT__1up",
+    "tree_MUON_EFF_RECO_SYS__1down",
+    "tree_MUON_EFF_RECO_SYS__1up",
+    "tree_MUON_EFF_RECO_SYS_LOWPT__1down",
+    "tree_MUON_EFF_RECO_SYS_LOWPT__1up",
+    "tree_MUON_EFF_TTVA_STAT__1down",
+    "tree_MUON_EFF_TTVA_STAT__1up",
+    "tree_MUON_EFF_TTVA_SYS__1down",
+    "tree_MUON_EFF_TTVA_SYS__1up",
+    "tree_MUON_ID__1down",
+    "tree_MUON_ID__1up",
+    "tree_MUON_MS__1down",
+    "tree_MUON_MS__1up",
+    "tree_MUON_SAGITTA_RESBIAS__1down",
+    "tree_MUON_SAGITTA_RESBIAS__1up",
+    "tree_MUON_SAGITTA_RHO__1down",
+    "tree_MUON_SAGITTA_RHO__1up",
+    "tree_MUON_SCALE__1down",
+    "tree_MUON_SCALE__1up",
+    "tree_PRW_DATASF__1down",
+    "tree_PRW_DATASF__1up",
+]
 
 feature_list = [
     "PtL1",
@@ -53,6 +94,18 @@ feature_list_fakes_data[-1] = "weightR"
 feature_list_final = [f.lower() for f in feature_list]
 feature_list_final[-1] = "weight"
 
+bkg_sys_wt_list = [
+    "weight_QCD_SCALE_UP_MZ1",
+    "weight_QCD_SCALE_DOWN_MZ1",
+    "weight_QCD_SCALE_UP_MZ2",
+    "weight_QCD_SCALE_DOWN_MZ2",
+    "weight_PDF_UP_MZ1",
+    "weight_PDF_UP_MZ2",
+    "weight_ALPHA_S_UP_MZ1",
+    "weight_ALPHA_S_UP_MZ2",
+]
+bkg_sys_wt_list_final = [f.lower() for f in bkg_sys_wt_list]
+
 data_names = {
     "data_all": "data",
 }
@@ -64,6 +117,11 @@ bkg_names = {
     "bkg_ggZZ": "tree_ggZZ",
     "bkg_fakes_data": "fakes_new/tree_data_new",
     "bkg_fakes_diboson": "fakes_new/tree_diboson",
+}
+
+bkg_names_p4_sys = {
+    "bkg_qcd": "tree_364250_QCD",
+    "bkg_ggZZ": "tree_ggZZ",
 }
 
 sig_names_low = {
@@ -137,6 +195,9 @@ def process_sample(sample_name, sample_path, is_sig, is_mc, m_truth_name, variat
     else:
         features = feature_list_data[:]
     column_names = feature_list_final[:]
+    if variation == "tree_NOMINAL" and sample_name == "bkg_qcd":
+        features += bkg_sys_wt_list
+        column_names += bkg_sys_wt_list_final
 
     sample_dfs = list()
     for chunk_pd in uproot.iterate(
@@ -173,6 +234,7 @@ def process_sample(sample_name, sample_path, is_sig, is_mc, m_truth_name, variat
         chunk_pd = chunk_pd.assign(is_mc=is_mc)
         # update df list
         sample_dfs.append(chunk_pd)
+
     sys.stdout.write("\033[K")
     return sample_dfs
 
@@ -182,15 +244,20 @@ low_dir.mkdir(parents=True, exist_ok=True)
 high_dir = df_dir / "high_mass"
 high_dir.mkdir(parents=True, exist_ok=True)
 for var in variations:
+    if var == "tree_NOMINAL":
+        cur_bkg_names = bkg_names
+    else:
+        cur_bkg_names = bkg_names_p4_sys
     # low mass region
     print("## Processing low mass region")
     low_df_list = list()
     ## data
-    for data_name, data_file in data_names.items():
-        root_path = ntup_dir / f"tree_{data_file}.root"
-        low_df_list += process_sample(data_name, root_path, False, False, "mz2", var)
+    if var == "tree_NOMINAL":
+        for data_name, data_file in data_names.items():
+            root_path = ntup_dir / f"tree_{data_file}.root"
+            low_df_list += process_sample(data_name, root_path, False, False, "mz2", var)
     ## bkg
-    for bkg_name, bkg_file in bkg_names.items():
+    for bkg_name, bkg_file in cur_bkg_names.items():
         root_path = ntup_dir / f"{bkg_file}.root"
         low_df_list += process_sample(bkg_name, root_path, False, True, "mz2", var)
     ## sig
@@ -211,11 +278,12 @@ for var in variations:
     print("## Processing high mass region")
     high_df_list = list()
     ## data
-    for data_name, data_file in data_names.items():
-        root_path = ntup_dir / f"tree_{data_file}.root"
-        high_df_list += process_sample(data_name, root_path, False, False, "mz1", var)
+    if var == "tree_NOMINAL":
+        for data_name, data_file in data_names.items():
+            root_path = ntup_dir / f"tree_{data_file}.root"
+            high_df_list += process_sample(data_name, root_path, False, False, "mz1", var)
     ## bkg
-    for bkg_name, bkg_file in bkg_names.items():
+    for bkg_name, bkg_file in cur_bkg_names.items():
         root_path = ntup_dir / f"{bkg_file}.root"
         high_df_list += process_sample(bkg_name, root_path, False, True, "mz1", var)
     ## sig

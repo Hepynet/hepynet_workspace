@@ -1,7 +1,7 @@
 # default input config file for high mass region
 
 input:
-    input_path: "zprime/data_frames/21-0120-sys/high_mass/tree_NOMINAL/zprime_high_m_quadtype_2_unblind.feather"
+    input_path: "zprime/data_frames/22-0120-sys/high_mass/tree_NOMINAL/zprime_high_m_quadtype_2_unblind.feather"
     norm_array: true
     bkg_key: "all"
     sig_key: "all_norm"
@@ -13,6 +13,8 @@ input:
         - "bkg_ggZZ"
         - "bkg_fakes_data"
         - "bkg_fakes_diboson"
+        - "bkg_ttv"
+        - "bkg_vvv"
     sig_list:
         - "sig_Zp042"
         - "sig_Zp045"

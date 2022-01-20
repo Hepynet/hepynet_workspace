@@ -1,0 +1,17 @@
+config:
+    include:
+        - "share/zprime/input/input_hm_unblind.sec.yaml"
+        - "share/zprime/train/train_hm.sec.yaml"
+    #best_tune_overwrite: True
+
+job:
+    job_name: "train-best-limit-epoch_20"
+    job_type: "train"
+    save_dir: "run/zprime/eb_checks_2022/high_mass"
+
+input:
+    bkg_sumofweight: 1906250
+    sig_sumofweight: 103972
+
+train:
+    epochs: 20

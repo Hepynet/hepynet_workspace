@@ -1,0 +1,23 @@
+config:
+    include:
+        - "share/zprime/master/eb_checks_2022/high_mass/train_best_limit_epoch_50.yaml"
+        - "share/zprime/apply/apply_hm.sec.yaml"
+
+job:
+    job_name: "all_mass"
+    job_type: "apply"
+    train_job_name: "train-best-limit-epoch_50"
+
+input:
+    # only remove negative events for training
+    negative_weight_process: "keep"
+    # don't reset background events' physic parameter when apply pDNN
+    reset_feature: false
+
+apply:
+    book_fit_inputs: true
+    fit_df:
+        branches:
+            - "mz1"
+            - "mz2"
+        save_dir: "zprime/data_frames_fit/22-0120-sys-best-limit-epoch50/high_mass"
