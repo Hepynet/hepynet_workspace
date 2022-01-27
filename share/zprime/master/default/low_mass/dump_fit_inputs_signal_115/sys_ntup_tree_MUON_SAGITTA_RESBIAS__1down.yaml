@@ -1,0 +1,27 @@
+config:
+    include:
+        - "share/zprime/master/default/low_mass/train.yaml"
+
+job:
+    job_name: "dump_ntup_sys_tree_MUON_SAGITTA_RESBIAS__1down"
+    job_type: "apply"
+    train_job_name: "default_train"
+
+input:
+    input_path: "zprime/data_frames/22-0126-sys/low_mass/tree_MUON_SAGITTA_RESBIAS__1down/zprime_low_m_quadtype_2_new_mc.feather"
+    negative_weight_process: "keep"
+    reset_feature: false
+
+    bkg_list:
+        - "bkg_qcd"
+    data_list: []
+
+
+apply:
+    book_fit_inputs: true
+    fit_df:
+        branches:
+            - "mz1"
+            - "mz2"
+        save_dir: "zprime/data_frames_fit/22-0126-sys/low_mass/tree_MUON_SAGITTA_RESBIAS__1down"
+

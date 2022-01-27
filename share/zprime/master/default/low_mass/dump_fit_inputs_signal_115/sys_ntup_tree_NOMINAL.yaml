@@ -1,0 +1,35 @@
+config:
+    include:
+        - "share/zprime/master/default/low_mass/train.yaml"
+
+job:
+    job_name: "dump_ntup_sys_tree_NOMINAL"
+    job_type: "apply"
+    train_job_name: "default_train"
+
+input:
+    input_path: "zprime/data_frames/22-0126-sys/low_mass/tree_NOMINAL/zprime_low_m_quadtype_2_new_mc.feather"
+    negative_weight_process: "keep"
+    reset_feature: false
+
+    bkg_list:
+        - "bkg_qcd"
+    data_list: []
+
+
+apply:
+    book_fit_inputs: true
+    fit_df:
+        branches:
+            - "mz1"
+            - "mz2"
+            - "weight_qcd_scale_up_mz1"
+            - "weight_qcd_scale_down_mz1"
+            - "weight_qcd_scale_up_mz2"
+            - "weight_qcd_scale_down_mz2"
+            - "weight_pdf_up_mz1"
+            - "weight_pdf_up_mz2"
+            - "weight_alpha_s_up_mz1"
+            - "weight_alpha_s_up_mz2"
+        save_dir: "zprime/data_frames_fit/22-0126-sys/low_mass/tree_NOMINAL"
+
