@@ -1,7 +1,6 @@
 config:
     include:
         - "share/zprime/master/default/low_mass/train.yaml"
-        - "share/zprime/input/input_lm_unblind.sec.yaml"
 
 job:
     job_name: "all_mass_unblind"

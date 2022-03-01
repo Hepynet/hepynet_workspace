@@ -1,3 +1,6 @@
+# Using 21-0120-sys inputs with updated process added (fakes, ttv, etc. )
+
+
 from calendar import c
 import pathlib
 import sys
@@ -111,6 +114,8 @@ data_names = {
 }
 
 bkg_names = {
+    "bkg_ttbar": "tree_ttbar",
+    "bkg_zll": "tree_zll",
     "bkg_ttv": "tree_ttv",
     "bkg_vvv": "tree_vvv",
     "bkg_qcd": "tree_364250_QCD",
@@ -187,9 +192,11 @@ sig_masses = {
 def process_sample(sample_name, sample_path, is_sig, is_mc, m_truth_name, variation):
     print(f"Processing: {sample_name} (variation: {variation})")
 
+    apply_cut = f"quadtype == 2"
     if is_mc:
         if "bkg_fakes_data" in sample_name:
             features = feature_list_fakes_data[:]
+            apply_cut = f"(quadtype == 2) & (numfake == 2)"
         else:
             features = feature_list[:]
     else:
@@ -203,7 +210,7 @@ def process_sample(sample_name, sample_path, is_sig, is_mc, m_truth_name, variat
     for chunk_pd in uproot.iterate(
         f"{sample_path}:{variation}",
         features,
-        cut=f"quadtype == 2",
+        cut=apply_cut,
         library="pd",
         step_size="200 MB",
     ):
@@ -232,6 +239,13 @@ def process_sample(sample_name, sample_path, is_sig, is_mc, m_truth_name, variat
         chunk_pd = chunk_pd.assign(camp=None)
         chunk_pd = chunk_pd.assign(is_sig=is_sig)
         chunk_pd = chunk_pd.assign(is_mc=is_mc)
+        # special fake_diboson
+        if sample_name == "bkg_fakes_diboson":
+            chunk_pd["weight"] *= 0.7
+        if sample_name == "bkg_zll":
+            chunk_pd["weight"] *= 0.9
+        if sample_name == "bkg_ttbar":
+            chunk_pd["weight"] *= 0.1
         # update df list
         sample_dfs.append(chunk_pd)
 

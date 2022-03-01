@@ -1,7 +1,7 @@
 # default input config file for low mass region
 
 input:
-    input_path: "zprime/data_frames/21-0120-sys/low_mass/tree_NOMINAL/zprime_low_m_quadtype_2.feather"
+    input_path: "zprime/data_frames/22-0120-sys/low_mass/tree_NOMINAL/zprime_low_m_quadtype_2_unblind.feather"
     norm_array: true
     bkg_key: "all"
     sig_key: "all_norm"
@@ -13,6 +13,8 @@ input:
         - "bkg_ggZZ"
         - "bkg_fakes_data"
         - "bkg_fakes_diboson"
+        - "bkg_ttv"
+        - "bkg_vvv"
     sig_list:
         - "sig_Zp005"
         - "sig_Zp007"
@@ -27,6 +29,8 @@ input:
         - "sig_Zp031"
         - "sig_Zp035"
         - "sig_Zp039"
+    data_list:
+        - "data_all"
 
     selected_features:
         - "m_truth"

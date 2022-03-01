@@ -8,11 +8,10 @@ job:
     train_job_name: "default_train"
 
 input:
-    input_path: "zprime/data_frames/21-0120-sys/low_mass/tree_NOMINAL/zprime_low_m_quadtype_2_fakes_data.feather"
     negative_weight_process: "keep"
     reset_feature: false
     bkg_list:
-        - "bkg_fakes_data"
+        - "bkg_fakes_diboson"
     sig_list: []
 
 apply:

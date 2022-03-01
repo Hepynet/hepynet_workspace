@@ -1,0 +1,10 @@
+config:
+    include:
+        - "share/zprime/master/default/22_0225_unblind_check/mva_scores/use_mc_fake/high_mass.yaml"
+job:
+    job_name: "unblind_mva_mc_fake_mz1_below_80"
+    job_type: "apply"
+    train_job_name: "default_train"
+
+input:
+    cut_expression: "mz1 < 80"

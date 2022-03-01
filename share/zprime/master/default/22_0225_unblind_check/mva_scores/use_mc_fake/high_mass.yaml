@@ -1,0 +1,69 @@
+config:
+    include:
+        - "share/zprime/master/default/high_mass/train.yaml"
+
+job:
+    job_name: "unblind_mva_mc_fake"
+    job_type: "apply"
+    train_job_name: "default_train"
+
+input:
+    bkg_list:
+        - "bkg_qcd"
+        - "bkg_ggZZ"
+        #- "bkg_fakes_data"
+        - "bkg_fakes_diboson"
+        - "bkg_ttv"
+        - "bkg_vvv"
+        - "bkg_ttbar"
+        - "bkg_zll"
+    # only remove negative events for training
+    negative_weight_process: "keep"
+    # don't reset background events' physic parameter when apply pDNN
+    reset_feature: false
+
+apply:
+    plot_atlas_label: true
+    atlas_label:
+        status: "internal"
+        #simulation: "true"
+        energy: "13 TeV"
+        lumi: 139
+    show_input_stats: true
+    book_mva_scores_data_mc: true
+    cfg_mva_scores_data_mc:
+        fig_size: [10, 10]
+        sig_list:
+            #- "sig_Zp042"
+            - "sig_Zp051:$Z\\rightarrow\\mu\\mu Z'$ (51 GeV, g=0.1) x25"
+            #- "sig_Zp060"
+            - "sig_Zp069:$Z\\rightarrow\\mu\\mu Z'$ (69 GeV, g=0.1) x25"
+            #- "sig_Zp075"
+        bkg_list:
+            - "bkg_ttbar+bkg_zll:other BKG"
+            - "bkg_ggZZ+bkg_qcd+bkg_fakes_diboson:SM ZZ* BKG"
+        data_key: "data_all"
+        apply_data: true
+        apply_data_range:
+        plot_title: "MVA scores"
+        bins: 20
+        range: [0, 0.5]
+        density: false
+        show_ratio: true
+        legend_paras:
+            loc: "upper right"
+            ncol: 1
+        #sig_scale: 0.7  # g=0.12 scale to g=0.1
+        sig_scale:
+            $Z\rightarrow\mu\mu Z'$ (51 GeV, g=0.1) x25: 17.5 # g=0.12 scale to g=0.1
+            $Z\rightarrow\mu\mu Z'$ (69 GeV, g=0.1) x25: 17.5 # g=0.467 scale to g=0.1
+        label_scale: false
+        log: true
+        logy_min: 0.1
+        save_format: "png"
+
+        #plot_patch:
+        #    set_xscale:
+        #        value: "symlog"
+        #        linthresh: 0.01
+        #        linscale: 0.0625
