@@ -1,0 +1,40 @@
+input:
+  input_path: "sm_2l2v/data_frames/22-0213-mva/input_simple.feather"
+  negative_weight_process: "to_zero" # could be "to_zero", "to_positive" or "keep"
+  bkg_key: "all"
+  sig_key: "all"
+  bkg_sumofweight: 10000000
+  sig_sumofweight: 10000000
+
+  bkg_list:
+    - "bkg_diboson"
+    - "bkg_Zll"
+    - "bkg_triboson"
+    - "bkg_lep"
+    - "bkg_top"
+    - "bkg_gg"
+  sig_list:
+    - "sig_gg"
+    - "sig_lep"
+    - "sig_jj"
+
+  selected_features:
+    - "dMetZPhi"
+    - "met_signif"
+    - "MetOHT"
+    - "met_tst"
+    - "leading_pT_lepton"
+    - "subleading_pT_lepton"
+    - "M2Lep"
+    - "dLepR"
+    - "dLepEtaAbs"
+    - "dLepPhiAbs"
+    - "Z_pT"
+    - "Z_rapidity"
+    - "mT_ZZ"
+    - "n_jets"
+    - "ZpTomT"
+    - "sumpT_scalar"
+    - "RhoZ"
+    - "LepRatio"
+  reset_feature: false

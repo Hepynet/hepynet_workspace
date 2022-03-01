@@ -1,0 +1,13 @@
+config:
+    include:
+        - "share/sm_2l2v/input/default_input.sec.yaml"
+        - "share/sm_2l2v/train/test_train.sec.yaml"
+
+job:
+    job_name: "train_test"
+    job_type: "train"
+    save_dir: "run/sm_2l2v/train_test"
+
+input:
+    custom_sample_scale: 
+        "bkg_lep": 2

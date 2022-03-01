@@ -1,0 +1,28 @@
+config:
+    include:
+        - "share/sm_2l2v/master/default/train_test.yaml"
+        - "share/sm_2l2v/apply/default_apply.sec.yaml"
+
+job:
+    job_name: "apply_test"
+    job_type: "apply"
+    train_job_name: "train_test"
+
+input:
+    negative_weight_process: "keep"
+
+apply:
+    #jump_model_studies: true
+
+    book_confusion_matrix: false
+    book_cor_matrix: false
+    book_cut_kine_study: false
+    book_fit_inputs: false
+    book_history: true
+    book_importance_study: false
+    book_kine: false
+    book_mva_scores_data_mc: false
+    book_pr: false
+    book_roc: true
+    book_significance_scan: true
+    book_train_test_compare: false

@@ -1,0 +1,35 @@
+train:
+    model_name: "sm_2l2v_default"
+    model_class: "Model_Sequential_Flat"
+    layers: 5
+    nodes: 256
+    dropout_rate: 0
+    momentum: 0.5
+    nesterov: true
+    test_rate: .2
+    val_split: .25
+    #k_folds: 5
+    learn_rate: 0.1
+    learn_rate_decay: 0.02
+    batch_size: 512
+    epochs: 300
+    sig_class_weight: 1.
+    bkg_class_weight: 1.
+
+    train_metrics_weighted:
+        - "accuracy"
+        - "auc"
+
+    # early stop setups
+    use_early_stop: true
+    early_stop_paras:
+        monitor: "val_loss"
+        min_delta: 0
+        mode: "min"
+        #monitor: "val_auc"
+        #min_delta: 0.00005
+        #mode: "max"
+        patience: 5
+        restore_best_weights: true
+
+    verbose: 1

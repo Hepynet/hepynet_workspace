@@ -1,0 +1,12 @@
+config:
+    include:
+        - "share/sm_2l2v/master/default/train.yaml"
+        - "share/sm_2l2v/apply/default_apply.sec.yaml"
+
+job:
+    job_name: "default_apply"
+    job_type: "apply"
+    train_job_name: "default_train"
+
+input:
+  negative_weight_process: "keep"

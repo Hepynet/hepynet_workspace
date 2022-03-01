@@ -1,0 +1,9 @@
+config:
+    include:
+        - "share/sm_2l2v/input/default_input.sec.yaml"
+        - "share/sm_2l2v/train/default_train.sec.yaml"
+
+job:
+    job_name: "default_train"
+    job_type: "train"
+    save_dir: "run/sm_2l2v/default_train"

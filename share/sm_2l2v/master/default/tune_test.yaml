@@ -1,0 +1,105 @@
+config:
+    include:
+        - "share/sm_2l2v/input/default_input.sec.yaml"
+
+job:
+    job_name: "tune_test"
+    job_type: "tune"
+    save_dir: "run/sm_2l2v/tune_test"
+
+tune:
+    tuner:
+        scheduler_class: AsyncHyperBandScheduler
+        scheduler:
+            time_attr: training_iteration
+            max_t: 50
+            grace_period: 2
+        algo_class: HEBOSearch
+        algo:
+            metric: val_auc
+            mode: max
+            max_concurrent: 16
+        stopper_class: 
+        stopper:
+            metric: auc_unreset_improvement
+            metric_threshold: 0.0005
+            mode: max
+        run:
+            metric: val_auc
+            mode: max
+            #stop:
+            #val_accuracy: 0.99
+            #training_iteration: 3
+            num_samples: 1000
+            resources_per_trial:
+                cpu: 1
+                gpu: 0
+            log_to_file: true
+    model_class: "Model_Sequential_Flat"
+    model:
+        layers:
+            spacer: randint
+            paras:
+                lower: 2
+                upper: 6
+        nodes:
+            spacer: choice
+            paras:
+              #categories: [16, 32, 64, 128, 256]
+                categories: [32, 64, 128, 256]
+        dropout_rate:
+            spacer: quniform
+            paras:
+                lower: 0
+                upper: 0.9
+                q: 0.1
+        momentum:
+            spacer: quniform
+            paras:
+                lower: 0
+                upper: 0.9
+                q: 0.1
+        nesterov: true
+        test_rate: .2
+        val_split: .25
+        learn_rate:
+            spacer: qloguniform
+            paras:
+                lower: 1.e-5
+                upper: 1
+                q: 5.e-6
+        learn_rate_decay:
+            spacer: qloguniform
+            paras:
+                lower: 1.e-5
+                upper: 0.01
+                q: 5.e-6
+        batch_size:
+            spacer: choice
+            paras:
+                categories: [16, 32, 128, 256, 512]
+        epochs: 100
+        sig_class_weight:
+            spacer: quniform
+            paras:
+                lower: 1
+                upper: 10
+                q: 1
+        bkg_class_weight:
+            spacer: quniform
+            paras:
+                lower: 1
+                upper: 10
+                q: 1
+        #use_early_stop: true
+        early_stop_paras:
+            monitor: "val_auc"
+            min_delta: 0.0005
+            patience: 3
+            mode: "max"
+            restore_best_weights: true
+        custom_tune_metrics_weighted:
+            - auc_unreset
+            - auc_unreset_delta
+            - min_limit
+            - min_limit_delta
