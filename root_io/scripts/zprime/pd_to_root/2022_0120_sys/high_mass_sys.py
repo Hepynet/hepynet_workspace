@@ -10,7 +10,7 @@ ntup_dir = pathlib.Path("/data/zprime/ntuples_fit/22-0120-sys/high_mass")
 ntup_dir.mkdir(parents=True, exist_ok=True)
 
 samples = [
-    "data_all",
+    #"data_all",
     "bkg_qcd",
     "bkg_ggZZ",
     "bkg_fakes_data",
@@ -19,6 +19,7 @@ samples = [
     "bkg_vvv",
     "bkg_ttbar",
     "bkg_zll",
+    "sig_Zp039",
     "sig_Zp042",
     "sig_Zp045",
     "sig_Zp048",
@@ -91,7 +92,10 @@ for var in variations:
     print(f"Variation: {var}")
     ntup_dir_var = ntup_dir / var
     ntup_dir_var.mkdir(parents=True, exist_ok=True)
-    for sample in samples:
+    cur_samples = samples
+    if var == "tree_NOMINAL":
+        cur_samples.append("data_all")
+    for sample in cur_samples:
         print(f"Generating fit ntuples for: {sample}")
         # read dataframe
         df_path = df_dir / var / f"{sample}.feather"
