@@ -10,6 +10,9 @@ job:
 input:
     input_path: "zprime/data_frames/22-0120-sys/low_mass/tree_MUON_EFF_ISO_STAT__1up/zprime_low_m_quadtype_2_unblind.feather"
     sig_list:
+        - "sig_Zp027"
+        - "sig_Zp031"
+        - "sig_Zp035"
         - "sig_Zp039"
     bkg_list: []
     data_list: []

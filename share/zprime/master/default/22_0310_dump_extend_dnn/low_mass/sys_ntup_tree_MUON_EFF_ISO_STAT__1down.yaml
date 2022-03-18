@@ -11,6 +11,10 @@ input:
     input_path: "zprime/data_frames/22-0120-sys/high_mass/tree_MUON_EFF_ISO_STAT__1down/zprime_high_m_quadtype_2_unblind.feather"
     sig_list:
         - "sig_Zp042"
+        - "sig_Zp045"
+        - "sig_Zp048"
+        - "sig_Zp051"
+
     bkg_list: []
     data_list: []
     negative_weight_process: "keep"

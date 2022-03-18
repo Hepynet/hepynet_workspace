@@ -3,7 +3,7 @@ config:
         - "share/zprime/master/default/high_mass/train.yaml"
 
 job:
-    job_name: "unblind_mva_mc_fake"
+    job_name: "unblind_mva_dd_fake"
     job_type: "apply"
     train_job_name: "default_train"
 
@@ -11,12 +11,12 @@ input:
     bkg_list:
         - "bkg_qcd"
         - "bkg_ggZZ"
-        #- "bkg_fakes_data"
+        - "bkg_fakes_data"
         - "bkg_fakes_diboson"
         - "bkg_ttv"
         - "bkg_vvv"
-        - "bkg_ttbar"
-        - "bkg_zll"
+        #- "bkg_ttbar"
+        #- "bkg_zll"
     # only remove negative events for training
     negative_weight_process: "keep"
     # don't reset background events' physic parameter when apply pDNN
@@ -37,17 +37,18 @@ apply:
             #- "sig_Zp042"
             - "sig_Zp051:$Z\\rightarrow\\mu\\mu Z'$ (51 GeV, g=0.1) x25"
             #- "sig_Zp060"
-            - "sig_Zp069:$Z\\rightarrow\\mu\\mu Z'$ (69 GeV, g=0.1) x25"
+            #- "sig_Zp069:$Z\\rightarrow\\mu\\mu Z'$ (69 GeV, g=0.1) x25"
             #- "sig_Zp075"
         bkg_list:
-            - "bkg_ttbar+bkg_zll:other BKG"
-            - "bkg_ggZZ+bkg_qcd+bkg_fakes_diboson:SM ZZ* BKG"
+            - "bkg_fakes_data:other BKG"
+            - "bkg_ggZZ+bkg_qcd+bkg_fakes_diboson+bkg_ttv+bkg_vvv:SM ZZ* BKG"
         data_key: "data_all"
         apply_data: true
         apply_data_range:
         plot_title: "MVA scores"
-        bins: 20
-        range: [0, 0.5]
+        #bins: 20
+        bins: [0, 0.025, 0.05, 0.05672574, 0.06435618, 0.07301304, 0.08283437, 0.09397681, 0.10661808, 0.12095978, 0.13723065, 0.1556902 , 0.17663283, 0.20039254, 0.22734829, 0.25792999, 0.29262537, 0.3319878 , 0.37664505, 0.42730936, 0.48478877, 0.55]
+        range: [0, 0.55]
         density: false
         show_ratio: true
         legend_paras:
@@ -56,11 +57,14 @@ apply:
         #sig_scale: 0.7  # g=0.12 scale to g=0.1
         sig_scale:
             $Z\rightarrow\mu\mu Z'$ (51 GeV, g=0.1) x25: 17.5 # g=0.12 scale to g=0.1 & x25
-            $Z\rightarrow\mu\mu Z'$ (69 GeV, g=0.1) x25: 17.5 # g=0.467 scale to g=0.1 & x25
+            #$Z\rightarrow\mu\mu Z'$ (69 GeV, g=0.1) x25: 17.5 # g=0.467 scale to g=0.1 & x25
         label_scale: false
         log: true
+        symlog_x: true
+        linthresh: 0.05
+        linscale: 0.1
         logy_min: 0.1
-        save_format: "png"
+        save_format: ["png", "eps", "pdf"]
 
         #plot_patch:
         #    set_xscale:
