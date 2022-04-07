@@ -28,6 +28,11 @@ apply:
         branches:
             - "mz1"
             - "mz2"
+            - "mz1_mz2"
+            - "ptz1"
+            - "ptz2"
+            - "mzz"
+            - "ptzz"
         save_dir: "zprime/data_frames_fit/22-0120-sys/low_mass/{p_variation}"
 
 """
@@ -38,6 +43,11 @@ apply:
         branches:
             - "mz1"
             - "mz2"
+            - "mz1_mz2"
+            - "ptz1"
+            - "ptz2"
+            - "mzz"
+            - "ptzz"
             - "weight_qcd_scale_up_mz1"
             - "weight_qcd_scale_down_mz1"
             - "weight_qcd_scale_up_mz2"

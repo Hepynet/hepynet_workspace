@@ -37,7 +37,7 @@ samples = [
     "sig_Zp048",
     "sig_Zp051",
 ]
-branch_list = ["mz1", "mz2", "dnn_out_sig", "weight"]
+branch_list = ["mz1", "mz2", "mz1_mz2", "ptz1", "ptz2", "mzz", "dnn_out_sig", "weight"]
 sys_wt_list = [
     "weight_qcd_scale_up_mz1",
     "weight_qcd_scale_down_mz1",

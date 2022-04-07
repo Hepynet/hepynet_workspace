@@ -10,7 +10,7 @@ ntup_dir = pathlib.Path("/data/zprime/ntuples_fit/22-0120-sys/high_mass")
 ntup_dir.mkdir(parents=True, exist_ok=True)
 
 samples = [
-    #"data_all",
+    # "data_all",
     "bkg_qcd",
     "bkg_ggZZ",
     "bkg_fakes_data",
@@ -36,7 +36,7 @@ samples = [
     "sig_Zp072",
     "sig_Zp075",
 ]
-branch_list = ["mz1", "mz2", "dnn_out_sig", "weight"]
+branch_list = ["mz1", "mz2", "mz1_mz2", "ptz1", "ptz2", "mzz", "dnn_out_sig", "weight"]
 sys_wt_list = [
     "weight_qcd_scale_up_mz1",
     "weight_qcd_scale_down_mz1",
