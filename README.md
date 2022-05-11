@@ -62,21 +62,9 @@ This repository setup the workspace to make use of **hepynet**.
 
 ## **Preparations**
 
-- **Prepare numpy arrays as inputs**
+- **Prepare dataframes as inputs**
 
-  - You can write your own code to generate numpy arrays from root files
-  - Or refer to [hepynet_root_npy](https://github.com/HEPTools/hepynet_root_npy) for more information about **root <--> numpy transformation**
-  - Numpy arrays should be organized as following
-
-    ```bash
-    Data_folder/path_to_array_folder/array_version/campaign/region/feature.npy
-    ```
-
-    Note:
-
-    - "Data_folder" is what you set in pc_meta.yaml
-    - "path_to_array_folder" is what you specified in train/apply job config files
-    - each numpy array file should only save **one** input feature
+  - refer to root_io for examples
 
 - **Prepare job config files**
 
