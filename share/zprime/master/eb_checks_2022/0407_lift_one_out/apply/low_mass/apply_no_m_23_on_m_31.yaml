@@ -1,0 +1,23 @@
+config:
+    include:
+        - "share/zprime/master/eb_checks_2022/0407_lift_one_out/train/low_mass/train_no_m_23.yaml"
+
+
+job:
+    job_name: "apply_no_m_23_on_m_31"
+    job_type: "apply"
+    train_job_name: "train_no_m_23"
+
+input:
+    # only remove negative events for training
+    negative_weight_process: "keep"
+    # don't reset background events' physic parameter when apply pDNN
+    reset_feature: false
+
+    cut_expression: "mz2 > 29.42997447499171 & mz2 < 32.57002552500829"
+
+    sig_list:
+        - "sig_Zp031"
+
+apply:
+    book_roc: true

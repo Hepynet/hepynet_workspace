@@ -1,0 +1,30 @@
+# currently, using hyperparameters optimized on limit@39GeV
+
+config:
+    include:
+        - "share/zprime/input/input_lm.sec.yaml"
+        - "share/zprime/train/train_lm.sec.yaml"
+
+job:
+    job_name: "train_no_m_39"
+    job_type: "train"
+    save_dir: "run/zprime/eb_checks_2022/low_mass"
+
+input:
+    bkg_sumofweight: 800875
+    sig_sumofweight: 991550
+
+    sig_list:
+        - "sig_Zp005"
+        - "sig_Zp007"
+        - "sig_Zp009"
+        - "sig_Zp011"
+        - "sig_Zp013"
+        - "sig_Zp015"
+        - "sig_Zp017"
+        - "sig_Zp019"
+        - "sig_Zp023"
+        - "sig_Zp027"
+        - "sig_Zp031"
+        - "sig_Zp035"
+        #- "sig_Zp039"

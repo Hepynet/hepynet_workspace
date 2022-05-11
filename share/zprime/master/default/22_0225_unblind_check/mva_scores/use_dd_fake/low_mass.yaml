@@ -35,7 +35,8 @@ apply:
     cfg_mva_scores_data_mc:
         fig_size: [10, 10]
         sig_list:
-            - "sig_Zp035:$Z\\rightarrow\\mu\\mu Z'$ (35 GeV, g=0.05) x25"
+            #- "sig_Zp035:$Z\\rightarrow\\mu\\mu Z'$ (35 GeV, g=0.05) x25"
+            - "sig_Zp035:$Z\\rightarrow\\mu\\mu Z'$ (35 GeV)"
         bkg_list:
             - "bkg_fakes_data:other BKG"
             - "bkg_ggZZ+bkg_qcd+bkg_fakes_diboson+bkg_ttv+bkg_vvv:SM ZZ* BKG"

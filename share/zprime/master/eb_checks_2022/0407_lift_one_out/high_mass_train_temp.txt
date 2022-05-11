@@ -1,0 +1,29 @@
+# currently, using hyperparameters optimized on limit@75GeV
+
+config:
+    include:
+        - "share/zprime/input/input_hm.sec.yaml"
+        - "share/zprime/train/train_hm.sec.yaml"
+
+job:
+    job_name: "{p_job_name}"
+    job_type: "train"
+    save_dir: "run/zprime/eb_checks_2022/high_mass"
+
+input:
+    bkg_sumofweight: 1906250
+    sig_sumofweight: 103972
+
+    sig_list:
+        {p_cmt_42}- "sig_Zp042"
+        {p_cmt_45}- "sig_Zp045"
+        {p_cmt_48}- "sig_Zp048"
+        {p_cmt_51}- "sig_Zp051"
+        {p_cmt_54}- "sig_Zp054"
+        {p_cmt_57}- "sig_Zp057"
+        {p_cmt_60}- "sig_Zp060"
+        {p_cmt_63}- "sig_Zp063"
+        {p_cmt_66}- "sig_Zp066"
+        {p_cmt_69}- "sig_Zp069"
+        {p_cmt_72}- "sig_Zp072"
+        {p_cmt_75}- "sig_Zp075"
